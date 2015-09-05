@@ -8,6 +8,9 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
 	default-lazy-init="true">
 
+	<!-- 注解式事务 -->
+	<!-- <tx:annotation-driven transaction-manager="foundation.dao.TransactionManager" 
+		/> -->
 	<!-- 配置事务的通知（事务增强） -->
 	<tx:advice id="txAdvice" transaction-manager="foundation.dao.TransactionManager">
 		<tx:attributes>
