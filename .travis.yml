@@ -5,7 +5,5 @@ jdk:
   - openjdk7
 notifications:
   email:
-    recipients:
-      - zzycjcg@qq.com
-    on_success: always
+    on_success: change
     on_failure: always
