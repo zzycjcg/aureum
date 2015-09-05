@@ -21,8 +21,8 @@ import javax.ws.rs.core.MediaType;
 @Path("hello")
 public interface HelloResource
 {
-	@GET
-	@Path("say")
-	@Produces(MediaType.APPLICATION_JSON)
-	Map<String, Object> sayHello();
+    @GET
+    @Path("say")
+    @Produces(MediaType.APPLICATION_JSON)
+    Map<String, Object> sayHello();
 }

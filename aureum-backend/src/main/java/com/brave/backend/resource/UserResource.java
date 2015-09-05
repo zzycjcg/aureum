@@ -21,7 +21,6 @@ public interface UserResource
      *
      * @param username the username
      * @param password the password
-     * @throws GeneralBraveException the general brave exception
      */
     @POST
     @Path("login")
@@ -30,8 +29,6 @@ public interface UserResource
     
     /**
      * Logout.
-     *
-     * @throws GeneralBraveException the general brave exception
      */
     @POST
     @Path("logout")
@@ -43,7 +40,6 @@ public interface UserResource
      *
      * @param username the username
      * @param password the password
-     * @throws GeneralBraveException the general brave exception
      */
     @POST
     @Path("register")
@@ -55,7 +51,6 @@ public interface UserResource
      *
      * @param username the username
      * @return true, if is username taken
-     * @throws GeneralBraveException the general brave exception
      */
     @POST
     @Path("check/username")
@@ -66,18 +61,28 @@ public interface UserResource
      * Delete.
      *
      * @param username the username
-     * @throws GeneralBraveException the general brave exception
      */
     @POST
     @Path("delete")
     @Produces(MediaType.APPLICATION_JSON)
     void delete(@FormParam("username") String username);
     
+    /**
+     * Gets the captcha.
+     *
+     * @return the captcha
+     */
     @GET
     @Path("captcha/get")
     @Produces("image/png")
     byte[] getCaptcha();
     
+    /**
+     * Varify captcha.
+     *
+     * @param captcha the captcha
+     * @return the map
+     */
     @POST
     @Path("captcha/varification")
     @Produces(MediaType.APPLICATION_JSON)

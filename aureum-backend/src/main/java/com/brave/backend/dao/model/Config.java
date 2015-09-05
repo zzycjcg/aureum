@@ -83,7 +83,7 @@ public class Config
         
         Config otherConfig = (Config)other;
         return StringUtils.equals(this.configName, otherConfig.getConfigName())
-                && StringUtils.equals(this.configValue, otherConfig.getConfigValue());
+            && StringUtils.equals(this.configValue, otherConfig.getConfigValue());
     }
     
     /** {@inheritDoc} */
