@@ -16,21 +16,4 @@
 		parent="foundation.dao.BaseDao">
 		<property name="namespace" value="mybatis.mapper.Account" />
 	</bean>
-
-	<!-- 配置事务的通知（事务增强） -->
-	<tx:advice id="txAdvice" transaction-manager="foundation.dao.TransactionManager">
-		<tx:attributes>
-			<tx:method name="transfer" isolation="REPEATABLE_READ"
-				propagation="REQUIRED" />
-		</tx:attributes>
-	</tx:advice>
-
-	<!-- 切面配置 -->
-	<aop:config>
-		<aop:pointcut
-			expression="execution(* com.brave.backend.resource.AccountResource+.*(..))"
-			id="pointcut1" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut1" />
-	</aop:config>
-
 </beans>
