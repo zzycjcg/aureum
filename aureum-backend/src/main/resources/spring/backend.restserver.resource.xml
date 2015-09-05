@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd "
+	default-lazy-init="true">
+
+	<bean id="foundation.restserver.resource" class="org.springframework.beans.factory.config.SetFactoryBean">
+		<property name="targetSetClass" value="java.util.LinkedHashSet" />
+		<property name="sourceSet">
+			<list>
+				<ref bean="backend.resource.ExceptionMapper" />
+				<ref bean="backend.resource.SystemResource" />
+				<ref bean="backend.resource.HelloResource" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="backend.resource.ExceptionMapper" class="com.brave.backend.exception.DefaultExceptionMapper" />
+
+	<bean id="backend.resource.SystemResource" class="com.brave.backend.resource.impl.SystemResourceImpl">
+		<property name="configDao" ref="backend.dao.ConfigDao" />
+	</bean>
+
+	<bean id="backend.resource.HelloResource" class="com.brave.backend.resource.impl.HelloResourceImpl" />
+
+	<bean id="backend.resource.AccountResource" class="com.brave.backend.resource.impl.AccountResourceImpl">
+		<property name="accountDao" ref="backend.dao.AccountDao" />
+	</bean>
+</beans>

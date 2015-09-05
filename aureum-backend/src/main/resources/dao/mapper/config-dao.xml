@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.Config">
+
+	<resultMap type="Config" id="configResult">
+		<result column="CONFIGNAME" property="configName" />
+		<result column="CONFIGVALUE" property="configValue" />
+	</resultMap>
+
+	<sql id="configCol">
+		CONFIGNAME, CONFIGVALUE
+	</sql>
+
+	<select id="queryAll" resultMap="configResult">
+		select
+		<include refid="configCol" />
+		from
+		T_CONFIG
+	</select>
+
+	<select id="query" resultMap="configResult" parameterType="java.lang.String">
+		select
+		<include refid="configCol" />
+		from
+		T_CONFIG where CONFIGNAME=#{configName}
+	</select>
+
+	<update id="update" parameterType="Config">
+		update T_CONFIG set
+		CONFIGVALUE=#{configValue} where
+		CONFIGNAME=#{configName}
+	</update>
+
+	<insert id="insert" parameterType="Config">
+		insert into T_CONFIG (
+		<include refid="configCol" />
+		) values
+		(#{configName}, #{configValue})
+	</insert>
+</mapper>

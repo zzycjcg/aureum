@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-lazy-init="true">
+
+	<bean id="backend.dao.ConfigDao" parent="foundation.dao.BaseDao">
+		<property name="namespace" value="mybatis.mapper.Config" />
+	</bean>
+
+	<bean id="backend.dao.AccountDao" class="com.brave.backend.dao.impl.AccountDaoImpl"
+		parent="foundation.dao.BaseDao">
+		<property name="namespace" value="mybatis.mapper.Account" />
+	</bean>
+
+	<!-- 配置事务的通知（事务增强） -->
+	<tx:advice id="txAdvice" transaction-manager="foundation.dao.TransactionManager">
+		<tx:attributes>
+			<tx:method name="transfer" isolation="REPEATABLE_READ"
+				propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 切面配置 -->
+	<aop:config>
+		<aop:pointcut
+			expression="execution(* com.brave.backend.resource.AccountResource+.*(..))"
+			id="pointcut1" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut1" />
+	</aop:config>
+
+</beans>

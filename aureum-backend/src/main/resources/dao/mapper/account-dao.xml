@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.Account">
+
+	<resultMap type="Account" id="accountResult">
+		<result column="PROFILEID" property="profileID" />
+		<result column="MONEY" property="money" />
+	</resultMap>
+
+	<sql id="accountCol">
+		PROFILEID, MONEY
+	</sql>
+
+	<select id="queryAll" resultMap="accountResult">
+		select
+		<include refid="accountCol" />
+		from
+		T_ACCOUNT
+	</select>
+
+	<select id="query" resultMap="accountResult" parameterType="java.lang.String">
+		select
+		<include refid="accountCol" />
+		from
+		T_ACCOUNT where PROFILEID=#{profileID}
+	</select>
+
+	<update id="update" parameterType="Account">
+		update T_ACCOUNT set
+		MONEY=#{money} where
+		PROFILEID=#{profileID}
+	</update>
+
+	<update id="addMoney" parameterType="Account">
+		update T_ACCOUNT set
+		MONEY=MONEY+#{money} where
+		PROFILEID=#{profileID}
+	</update>
+
+	<update id="deductMoney" parameterType="Account">
+		update T_ACCOUNT set
+		MONEY=MONEY-#{money} where
+		PROFILEID=#{profileID}
+	</update>
+
+	<insert id="insert" parameterType="Account">
+		insert into T_ACCOUNT (
+		<include refid="accountCol" />
+		) values
+		(#{profileID}, #{money})
+	</insert>
+</mapper>

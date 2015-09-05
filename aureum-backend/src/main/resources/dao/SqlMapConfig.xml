@@ -1,0 +1,13 @@
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.brave.backend.dao.model.Config" alias="Config" />
+		<typeAlias type="com.brave.backend.dao.model.Account" alias="Account" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="dao/mapper/config-dao.xml" />
+		<mapper resource="dao/mapper/account-dao.xml" />
+	</mappers>
+</configuration>
