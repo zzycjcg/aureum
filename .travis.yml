@@ -3,3 +3,9 @@ jdk:
   - oraclejdk7
   - oraclejdk8
   - openjdk7
+notifications:
+  email:
+    recipients:
+      - zzycjcg@qq.com
+    on_success: [always|never|change] # default: change
+    on_failure: [always|never|change] # default: always
