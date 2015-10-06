@@ -9,5 +9,4 @@
 	<task:scheduled-tasks scheduler="taskScheduler">
 		<task:scheduled ref="backend.base.ConfigFacade" method="reload"
 			cron="0 */1 * * * ?" />
-	</task:scheduled-tasks>
 </beans>

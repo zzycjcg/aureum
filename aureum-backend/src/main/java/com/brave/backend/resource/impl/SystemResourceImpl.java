@@ -16,6 +16,9 @@ import com.brave.foundation.dao.BaseDao;
 
 /**
  * The Class SystemResourceImpl.
+ *
+ * @author zhiyong zhu at 2015-10-6
+ * @since v0.0.1
  */
 public class SystemResourceImpl implements SystemResource
 {
@@ -29,6 +32,11 @@ public class SystemResourceImpl implements SystemResource
     
     private BaseDao<Config> configDao;
     
+    /**
+     * Sets the config dao.
+     *
+     * @param configDao the new config dao
+     */
     public void setConfigDao(BaseDao<Config> configDao)
     {
         this.configDao = configDao;
@@ -76,6 +84,8 @@ public class SystemResourceImpl implements SystemResource
             }
         }
     }
+    
+    /** {@inheritDoc} */
     
     @Override
     public Map<String, Object> getPortalOutsideUrl()

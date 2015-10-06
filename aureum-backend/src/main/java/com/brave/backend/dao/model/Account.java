@@ -2,40 +2,53 @@ package com.brave.backend.dao.model;
 
 public class Account
 {
-    private String profileID;
+    private String accountId;
     
-    private double money;
+    private String accountName;
     
-    /**
-     * @return the profileID
-     */
-    public String getProfileID()
+    private String uid;
+    
+    public String getAccountId()
     {
-        return profileID;
+        return accountId;
     }
     
-    /**
-     * @param profileID the profileID to set
-     */
-    public void setProfileID(String profileID)
+    public void setAccountId(String accountId)
     {
-        this.profileID = profileID;
+        this.accountId = accountId;
     }
     
-    /**
-     * @return the money
-     */
-    public double getMoney()
+    public String getAccountName()
     {
-        return money;
+        return accountName;
     }
     
-    /**
-     * @param money the money to set
-     */
-    public void setMoney(double money)
+    public void setAccountName(String accountName)
     {
-        this.money = money;
+        this.accountName = accountName;
     }
     
+    public String getUid()
+    {
+        return uid;
+    }
+    
+    public void setUid(String uid)
+    {
+        this.uid = uid;
+    }
+    
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Account [accountId=");
+        builder.append(accountId);
+        builder.append(", accountName=");
+        builder.append(accountName);
+        builder.append(", uid=");
+        builder.append(uid);
+        builder.append("]");
+        return builder.toString();
+    }
 }

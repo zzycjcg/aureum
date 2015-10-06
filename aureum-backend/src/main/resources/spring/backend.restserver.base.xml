@@ -10,4 +10,9 @@
 		<property name="configDao" ref="backend.dao.ConfigDao" />
 	</bean>
 
+	<bean id="backend.base.ApplicationContextHolder" class="com.brave.backend.container.ApplicationContextHolder"
+		lazy-init="false">
+		<property name="instance" ref="backend.base.ApplicationContextHolder" />
+	</bean>
+
 </beans>

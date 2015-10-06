@@ -1,13 +1,17 @@
 package com.brave.backend.resource;
 
-import java.util.Map;
-
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.brave.backend.resource.message.CheckAccountExistanceRequest;
+import com.brave.backend.resource.message.CheckAccountExistanceResponse;
+import com.brave.backend.resource.message.LoginRequest;
+import com.brave.backend.resource.message.LoginResponse;
+import com.brave.backend.resource.message.LogoutResponse;
+import com.brave.backend.resource.message.RegisterRequest;
+import com.brave.backend.resource.message.RegisterResponse;
 
 /**
  * The Interface UserResource.
@@ -19,72 +23,43 @@ public interface UserResource
     /**
      * Login.
      *
-     * @param username the username
-     * @param password the password
+     * @param loginRequest the login request
+     * @return the login response
      */
     @POST
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
-    void login(@FormParam("username") String username, @FormParam("password") String password);
+    LoginResponse login(LoginRequest loginRequest);
     
     /**
      * Logout.
+     *
+     * @return the logout response
      */
     @POST
     @Path("logout")
     @Produces(MediaType.APPLICATION_JSON)
-    void logout();
+    LogoutResponse logout();
     
     /**
      * Register.
      *
-     * @param username the username
-     * @param password the password
+     * @param registerRequest the register request
+     * @return the register response
      */
     @POST
     @Path("register")
     @Produces(MediaType.APPLICATION_JSON)
-    void register(@FormParam("username") String username, @FormParam("password") String password);
+    RegisterResponse register(RegisterRequest registerRequest);
     
     /**
      * Checks if is username taken.
      *
-     * @param username the username
+     * @param checkAccountRequest the check account request
      * @return true, if is username taken
      */
     @POST
-    @Path("check/username")
+    @Path("check/accountName")
     @Produces(MediaType.APPLICATION_JSON)
-    boolean isUsernameTaken(@FormParam("username") String username);
-    
-    /**
-     * Delete.
-     *
-     * @param username the username
-     */
-    @POST
-    @Path("delete")
-    @Produces(MediaType.APPLICATION_JSON)
-    void delete(@FormParam("username") String username);
-    
-    /**
-     * Gets the captcha.
-     *
-     * @return the captcha
-     */
-    @GET
-    @Path("captcha/get")
-    @Produces("image/png")
-    byte[] getCaptcha();
-    
-    /**
-     * Varify captcha.
-     *
-     * @param captcha the captcha
-     * @return the map
-     */
-    @POST
-    @Path("captcha/varification")
-    @Produces(MediaType.APPLICATION_JSON)
-    Map<String, Object> varifyCaptcha(@FormParam("captcha") String captcha);
+    CheckAccountExistanceResponse checkAccountNameExistance(CheckAccountExistanceRequest checkAccountRequest);
 }

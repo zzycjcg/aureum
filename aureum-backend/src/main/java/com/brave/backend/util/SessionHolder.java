@@ -3,7 +3,7 @@ package com.brave.backend.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public abstract class ContextHolder
+public abstract class SessionHolder
 {
     private static final ThreadLocal<HttpSession> session = new ThreadLocal<HttpSession>();
     

@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import com.brave.backend.util.ContextHolder;
+import com.brave.backend.util.SessionHolder;
 
 public class ResourceSessionCheckFilter implements Filter
 {
@@ -25,8 +25,8 @@ public class ResourceSessionCheckFilter implements Filter
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException
     {
-        ContextHolder.setRequest((HttpServletRequest)request);
-        ContextHolder.setSession(((HttpServletRequest)request).getSession());
+        SessionHolder.setRequest((HttpServletRequest)request);
+        SessionHolder.setSession(((HttpServletRequest)request).getSession());
         // MUST why?
         chain.doFilter(request, response);
     }
