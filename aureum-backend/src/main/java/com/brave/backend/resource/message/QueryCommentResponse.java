@@ -78,8 +78,6 @@ public class QueryCommentResponse extends CommonResponse
         this.count = count;
     }
     
-    /** {@inheritDoc} */
-    
     @Override
     public String toString()
     {
@@ -90,8 +88,9 @@ public class QueryCommentResponse extends CommonResponse
         builder.append(totalPages);
         builder.append(", count=");
         builder.append(count);
+        builder.append(", toString()=");
+        builder.append(super.toString());
         builder.append("]");
         return builder.toString();
     }
-    
 }

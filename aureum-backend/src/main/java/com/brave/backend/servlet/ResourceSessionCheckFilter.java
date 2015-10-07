@@ -12,14 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.brave.backend.util.SessionHolder;
 
+/**
+ * The Class ResourceSessionCheckFilter.
+ *
+ * @author zhiyong zhu at 2015-10-7
+ * @since v0.0.1
+ */
 public class ResourceSessionCheckFilter implements Filter
 {
+    
+    /** {@inheritDoc} */
     
     @Override
     public void init(FilterConfig filterConfig)
         throws ServletException
     {
     }
+    
+    /** {@inheritDoc} */
     
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -30,6 +40,8 @@ public class ResourceSessionCheckFilter implements Filter
         // MUST why?
         chain.doFilter(request, response);
     }
+    
+    /** {@inheritDoc} */
     
     @Override
     public void destroy()

@@ -62,8 +62,6 @@ public class Comment
         builder.append(msgId);
         builder.append(", content=");
         builder.append(content);
-        builder.append(", toString()=");
-        builder.append(super.toString());
         builder.append("]");
         return builder.toString();
     }

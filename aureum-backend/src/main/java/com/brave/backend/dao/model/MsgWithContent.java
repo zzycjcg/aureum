@@ -2,10 +2,12 @@ package com.brave.backend.dao.model;
 
 /**
  * The Class MsgWithContent.
+ *
+ * @author zhiyong zhu at 2015-10-7
+ * @since v0.0.1
  */
 public class MsgWithContent extends Msg
 {
-    
     /** The text. */
     protected String text;
     

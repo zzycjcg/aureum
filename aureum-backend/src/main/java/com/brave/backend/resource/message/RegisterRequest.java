@@ -1,5 +1,11 @@
 package com.brave.backend.resource.message;
 
+/**
+ * The Class RegisterRequest.
+ *
+ * @author zhiyong zhu at 2015-10-7
+ * @since v0.0.1
+ */
 public class RegisterRequest
 {
     private String username;
@@ -13,6 +19,8 @@ public class RegisterRequest
     private String brief;
     
     /**
+     * Gets the username.
+     *
      * @return the username
      */
     public String getUsername()
@@ -21,6 +29,8 @@ public class RegisterRequest
     }
     
     /**
+     * Sets the username.
+     *
      * @param username the username to set
      */
     public void setUsername(String username)
@@ -29,6 +39,8 @@ public class RegisterRequest
     }
     
     /**
+     * Gets the password.
+     *
      * @return the password
      */
     public String getPassword()
@@ -37,6 +49,8 @@ public class RegisterRequest
     }
     
     /**
+     * Sets the password.
+     *
      * @param password the password to set
      */
     public void setPassword(String password)
@@ -45,6 +59,8 @@ public class RegisterRequest
     }
     
     /**
+     * Gets the email.
+     *
      * @return the email
      */
     public String getEmail()
@@ -53,6 +69,8 @@ public class RegisterRequest
     }
     
     /**
+     * Sets the email.
+     *
      * @param email the email to set
      */
     public void setEmail(String email)
@@ -61,6 +79,8 @@ public class RegisterRequest
     }
     
     /**
+     * Gets the mobile phone.
+     *
      * @return the mobilePhone
      */
     public String getMobilePhone()
@@ -69,6 +89,8 @@ public class RegisterRequest
     }
     
     /**
+     * Sets the mobile phone.
+     *
      * @param mobilePhone the mobilePhone to set
      */
     public void setMobilePhone(String mobilePhone)
@@ -77,6 +99,8 @@ public class RegisterRequest
     }
     
     /**
+     * Gets the brief.
+     *
      * @return the brief
      */
     public String getBrief()
@@ -85,6 +109,8 @@ public class RegisterRequest
     }
     
     /**
+     * Sets the brief.
+     *
      * @param brief the brief to set
      */
     public void setBrief(String brief)
@@ -108,8 +134,9 @@ public class RegisterRequest
         builder.append(mobilePhone);
         builder.append(", brief=");
         builder.append(brief);
+        builder.append(", toString()=");
+        builder.append(super.toString());
         builder.append("]");
         return builder.toString();
     }
-    
 }

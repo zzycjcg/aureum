@@ -23,13 +23,14 @@
 
 	<!-- 切面配置 -->
 	<aop:config>
+	<!-- 匹配com.brave.backend.resource.impl.service包下所有Class的operateDB方法，参数、返回类型不限 -->
 		<aop:pointcut
-			expression="execution(* com.brave.backend.resource.AccountResource+.*(..))"
+			expression="execution(* com.brave.backend.resource.impl.service.*.operateDB(..))"
 			id="txPointcut" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
 		<aop:aspect ref="logging">
 			<aop:pointcut
-				expression="execution(* com.brave.backend.resource.AccountResource+.*(..))"
+				expression="execution(* com.brave.backend.resource.impl.service.*.operateDB(..))"
 				id="postPointcut" />
 			<aop:after-throwing method="logging" pointcut-ref="postPointcut"
 				throwing="e" />

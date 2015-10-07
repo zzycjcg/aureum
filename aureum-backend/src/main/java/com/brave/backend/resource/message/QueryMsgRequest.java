@@ -2,6 +2,9 @@ package com.brave.backend.resource.message;
 
 /**
  * The Class QueryMsgRequest.
+ *
+ * @author zhiyong zhu at 2015-10-7
+ * @since v0.0.1
  */
 public class QueryMsgRequest extends CommonRequest
 {
@@ -98,4 +101,23 @@ public class QueryMsgRequest extends CommonRequest
         this.desc = desc;
     }
     
+    /** {@inheritDoc} */
+    
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("QueryMsgRequest [page=");
+        builder.append(page);
+        builder.append(", numPerPage=");
+        builder.append(numPerPage);
+        builder.append(", uid=");
+        builder.append(uid);
+        builder.append(", desc=");
+        builder.append(desc);
+        builder.append(", toString()=");
+        builder.append(super.toString());
+        builder.append("]");
+        return builder.toString();
+    }
 }

@@ -11,10 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <描述.>
+ * The Class DefaultExceptionMapper.
  *
- * @author 	ZZY
- * @date 	2015年9月5日
+ * @author zhiyong zhu at 2015-10-7
+ * @since v0.0.1
  */
 @Provider
 public class DefaultExceptionMapper implements ExceptionMapper<Throwable>

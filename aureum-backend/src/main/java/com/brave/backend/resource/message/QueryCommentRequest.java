@@ -2,6 +2,9 @@ package com.brave.backend.resource.message;
 
 /**
  * The Class QueryCommentRequest.
+ *
+ * @author zhiyong zhu at 2015-10-7
+ * @since v0.0.1
  */
 public class QueryCommentRequest extends CommonRequest
 {
@@ -136,8 +139,9 @@ public class QueryCommentRequest extends CommonRequest
         builder.append(uid);
         builder.append(", desc=");
         builder.append(desc);
+        builder.append(", toString()=");
+        builder.append(super.toString());
         builder.append("]");
         return builder.toString();
     }
-    
 }

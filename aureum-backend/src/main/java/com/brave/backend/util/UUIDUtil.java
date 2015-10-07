@@ -4,6 +4,9 @@ import java.util.UUID;
 
 /**
  * The Class UUIDUtil.
+ *
+ * @author zhiyong zhu at 2015-10-7
+ * @since v0.0.1
  */
 public abstract class UUIDUtil
 {
