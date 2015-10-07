@@ -94,7 +94,7 @@ public class LoginService
             return response;
         }
         // TODO 密码加密
-        User user = userDao.verifyUserPassword(account.getUid(), loginRequest.getPassword());
+        User user = userDao.queryByUIDAndPwd(account.getUid(), loginRequest.getPassword());
         if (user == null)
         {
             response.setResultCode(ReturnCodes.E1002);

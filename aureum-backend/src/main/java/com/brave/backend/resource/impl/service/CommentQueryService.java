@@ -77,10 +77,9 @@ public class CommentQueryService
         CommentQueryCondition condition = new CommentQueryCondition();
         condition.setDesc(queryCommentRequest.isDesc());
         condition.setUid(queryCommentRequest.getUid());
-        int[] startAndEnd =
-            PagingQueryUtil.calculateIndex(queryCommentRequest.getNumPerPage(), queryCommentRequest.getPage());
-        condition.setStart(startAndEnd[0]);
-        condition.setEnd(startAndEnd[1]);
+        int start = PagingQueryUtil.calculateStart(queryCommentRequest.getNumPerPage(), queryCommentRequest.getPage());
+        condition.setStart(start);
+        condition.setNumPerPage(queryCommentRequest.getNumPerPage());
         condition.setMsgId(queryCommentRequest.getMsgId());
         List<Comment> comments = commentDao.pagingQuery(condition);
         int count = commentDao.queryCount(condition);

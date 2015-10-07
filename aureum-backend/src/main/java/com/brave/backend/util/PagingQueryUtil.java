@@ -53,4 +53,17 @@ public abstract class PagingQueryUtil
         int divide = count / numPerPage;
         return count % numPerPage == 0 ? divide : divide + 1;
     }
+    
+    /**
+     * 计算起始下标.
+     *
+     * @param numPerPage 每页展示数量
+     * @param page 要展示的页码
+     * @return the int
+     */
+    public static int calculateStart(int numPerPage, int page)
+    {
+        return (page - 1) * numPerPage;
+    }
+    
 }

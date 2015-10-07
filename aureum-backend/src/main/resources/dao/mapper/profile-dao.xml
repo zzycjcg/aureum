@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.Profile">
+
+	<resultMap type="Profile" id="profileResult">
+		<result column="PROFILE_ID" property="profileId" />
+		<result column="UID" property="uid" />
+		<result column="USERNAME" property="username" />
+		<result column="EMAIL" property="email" />
+		<result column="MOBILE_PHONE" property="mobilePhone" />
+		<result column="BRIEF" property="brief" />
+	</resultMap>
+
+	<sql id="profileCol">
+		PROFILE_ID, UID, USERNAME, EMAIL, MOBILE_PHONE, BRIEF
+	</sql>
+
+	<select id="queryAll" resultMap="accountResult">
+		select
+		<include refid="profileCol" />
+		from
+		T_PROFILE
+	</select>
+
+	<select id="query" resultMap="profileResult" parameterType="java.lang.String">
+		select
+		<include refid="profileCol" />
+		from
+		T_PROFILE where PROFILE_ID=#{profileId}
+	</select>
+
+	<insert id="insert" parameterType="Profile">
+		insert into T_PROFILE (
+		<include refid="profileCol" />
+		) values
+		(#{profileId}, #{uid}, #{username}, #{email}, #{mobilePhone},
+		#{brief})
+	</insert>
+</mapper>

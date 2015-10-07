@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.User">
+
+	<resultMap type="User" id="userResult">
+		<result column="UID" property="uid" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="STATUS" property="status" />
+		<result column="PASSWORD" property="password" />
+	</resultMap>
+
+	<sql id="userCol">
+		UID, CREATE_TIME, STATUS, PASSWORD
+	</sql>
+
+	<select id="queryAll" resultMap="accountResult">
+		select
+		<include refid="userCol" />
+		from
+		T_USER
+	</select>
+
+	<select id="query" resultMap="userResult" parameterType="java.lang.String">
+		select
+		<include refid="userCol" />
+		from
+		T_USER where UID=#{uid}
+	</select>
+
+	<select id="queryByUIDAndPwd" resultMap="userResult"
+		parameterType="User">
+		select
+		<include refid="userCol" />
+		from
+		T_USER where UID=#{uid} and PASSWORD=#{password}
+	</select>
+
+	<insert id="insert" parameterType="User">
+		insert into T_USER (
+		<include refid="userCol" />
+		) values
+		(#{uid}, #{createTime}, #{status}, #{password})
+	</insert>
+</mapper>

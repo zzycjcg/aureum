@@ -5,12 +5,13 @@
 <mapper namespace="mybatis.mapper.Account">
 
 	<resultMap type="Account" id="accountResult">
-		<result column="PROFILEID" property="profileID" />
-		<result column="MONEY" property="money" />
+		<result column="ACCOUNT_ID" property="accountId" />
+		<result column="UID" property="uid" />
+		<result column="ACCOUNT_NAME" property="accountName" />
 	</resultMap>
 
 	<sql id="accountCol">
-		PROFILEID, MONEY
+		ACCOUNT_ID, UID, ACCOUNT_NAME
 	</sql>
 
 	<select id="queryAll" resultMap="accountResult">
@@ -24,31 +25,27 @@
 		select
 		<include refid="accountCol" />
 		from
-		T_ACCOUNT where PROFILEID=#{profileID}
+		T_ACCOUNT where ACCOUNT_ID=#{accountId}
+	</select>
+
+	<select id="queryByAccountName" resultMap="accountResult"
+		parameterType="java.lang.String">
+		select
+		<include refid="accountCol" />
+		from
+		T_ACCOUNT where ACCOUNT_NAME=#{accountName}
 	</select>
 
 	<update id="update" parameterType="Account">
 		update T_ACCOUNT set
-		MONEY=#{money} where
-		PROFILEID=#{profileID}
-	</update>
-
-	<update id="addMoney" parameterType="Account">
-		update T_ACCOUNT set
-		MONEY=MONEY+#{money} where
-		PROFILEID=#{profileID}
-	</update>
-
-	<update id="deductMoney" parameterType="Account">
-		update T_ACCOUNT set
-		MONEY=MONEY-#{money} where
-		PROFILEID=#{profileID}
+		ACCOUNT_NAME=#{accountName} where
+		ACCOUNT_ID=#{accountId}
 	</update>
 
 	<insert id="insert" parameterType="Account">
 		insert into T_ACCOUNT (
 		<include refid="accountCol" />
 		) values
-		(#{profileID}, #{money})
+		(#{accountId}, #{uid}, #{accountName})
 	</insert>
 </mapper>

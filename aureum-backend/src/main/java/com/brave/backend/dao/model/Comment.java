@@ -8,7 +8,6 @@ package com.brave.backend.dao.model;
  */
 public class Comment
 {
-    
     /** The comment id. */
     protected String commentId;
     

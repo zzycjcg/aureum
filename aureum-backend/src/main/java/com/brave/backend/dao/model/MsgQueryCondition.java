@@ -8,11 +8,9 @@ package com.brave.backend.dao.model;
  */
 public class MsgQueryCondition
 {
-    /** The start. */
     private int start;
     
-    /** The end. */
-    private int end;
+    private int numPerPage;
     
     /** 根据添加消息时间逆序. */
     private boolean desc;
@@ -41,23 +39,23 @@ public class MsgQueryCondition
     }
     
     /**
-     * Gets the end.
+     * Gets the num per page.
      *
-     * @return the end
+     * @return the num per page
      */
-    public int getEnd()
+    public int getNumPerPage()
     {
-        return end;
+        return numPerPage;
     }
     
     /**
-     * Sets the end.
+     * Sets the num per page.
      *
-     * @param end the new end
+     * @param numPerPage the new num per page
      */
-    public void setEnd(int end)
+    public void setNumPerPage(int numPerPage)
     {
-        this.end = end;
+        this.numPerPage = numPerPage;
     }
     
     /**
@@ -108,8 +106,8 @@ public class MsgQueryCondition
         StringBuilder builder = new StringBuilder();
         builder.append("MsgQueryCondition [start=");
         builder.append(start);
-        builder.append(", end=");
-        builder.append(end);
+        builder.append(", numPerPage=");
+        builder.append(numPerPage);
         builder.append(", desc=");
         builder.append(desc);
         builder.append(", uid=");
@@ -117,4 +115,5 @@ public class MsgQueryCondition
         builder.append("]");
         return builder.toString();
     }
+    
 }

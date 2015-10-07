@@ -13,11 +13,11 @@ public interface UserDao extends BaseDao<User>
 {
     
     /**
-     * Verify user password.
+     * Query by uid and pwd.
      *
      * @param uid the uid
      * @param password the password
      * @return the user
      */
-    User verifyUserPassword(String uid, String password);
+    User queryByUIDAndPwd(String uid, String password);
 }

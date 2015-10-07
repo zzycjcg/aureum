@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.Msg">
+
+	<resultMap type="Msg" id="msgResult">
+		<result column="MSG_ID" property="msgId" />
+		<result column="UID" property="uid" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<result column="TEXT" property="text" />
+		<result column="MULTI_MEDIA" property="multiMedia" />
+	</resultMap>
+
+	<sql id="msgCol">
+		MSG_ID, UID, CREATE_TIME, UPDATE_TIME, TEXT, MULTI_MEDIA
+	</sql>
+
+	<sql id="conditionSql">
+		select
+		<include refid="msgCol" />
+		from T_MSG
+		<if test="uid != null">
+			where UID=#{uid}
+		</if>
+		<choose>
+			<when test="!desc">
+				order by CREATE_TIME ASC
+			</when>
+			<otherwise>
+				order by CREATE_TIME DESC
+			</otherwise>
+		</choose>
+	</sql>
+
+	<select id="queryAll" resultMap="accountResult">
+		select
+		<include refid="msgCol" />
+		from
+		T_MSG
+	</select>
+
+	<select id="query" resultMap="msgResult" parameterType="java.lang.String">
+		select
+		<include refid="msgCol" />
+		from
+		T_MSG where MSG_ID=#{msgId}
+	</select>
+
+	<select id="queryCount" parameterType="MsgQueryCondition"
+		resultType="java.lang.Integer">
+		select count(1) from
+		(
+		<include refid="conditionSql" />
+		) as T_MSG_1
+	</select>
+
+	<select id="pagingQuery" parameterType="MsgQueryCondition"
+		resultMap="msgResult">
+		select
+		<include refid="msgCol" />
+		from (
+		<include refid="conditionSql" />
+		) as T_MSG_1 limit #{start}, #{numPerPage}
+	</select>
+
+	<insert id="insert" parameterType="Msg">
+		insert into T_MSG (
+		<include refid="msgCol" />
+		) values
+		(#{msgId}, #{uid}, #{createTime}, #{updateTime}, #{text},
+		#{multiMedia})
+	</insert>
+</mapper>

@@ -71,9 +71,9 @@ public class MsgQueryService
         MsgQueryCondition condition = new MsgQueryCondition();
         condition.setDesc(queryMsgRequest.isDesc());
         condition.setUid(queryMsgRequest.getUid());
-        int[] startAndEnd = PagingQueryUtil.calculateIndex(queryMsgRequest.getNumPerPage(), queryMsgRequest.getPage());
-        condition.setStart(startAndEnd[0]);
-        condition.setEnd(startAndEnd[1]);
+        int start = PagingQueryUtil.calculateStart(queryMsgRequest.getNumPerPage(), queryMsgRequest.getPage());
+        condition.setStart(start);
+        condition.setNumPerPage(queryMsgRequest.getNumPerPage());
         List<Msg> msgs = msgDao.pagingQuery(condition);
         int count = msgDao.queryCount(condition);
         response.setMsgs(msgs);

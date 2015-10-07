@@ -2,9 +2,11 @@ package com.brave.backend.resource.impl.service;
 
 import com.brave.backend.constant.ReturnCodes;
 import com.brave.backend.constant.ReturnMessages;
+import com.brave.backend.constant.SeqIds;
 import com.brave.backend.constant.UserStatus;
 import com.brave.backend.container.ApplicationContextHolder;
 import com.brave.backend.dao.AccountDao;
+import com.brave.backend.dao.SeqGenDao;
 import com.brave.backend.dao.UserDao;
 import com.brave.backend.dao.model.Account;
 import com.brave.backend.dao.model.Profile;
@@ -33,6 +35,8 @@ public class RegisterService
     
     /** The profile dao. */
     private BaseDao<Profile> profileDao;
+    
+    private SeqGenDao seqGenDao;
     
     private static RegisterService instance;
     
@@ -64,6 +68,16 @@ public class RegisterService
     public void setProfileDao(BaseDao<Profile> profileDao)
     {
         this.profileDao = profileDao;
+    }
+    
+    /**
+     * Sets the seq gen dao.
+     *
+     * @param seqGenDao the new seq gen dao
+     */
+    public void setSeqGenDao(SeqGenDao seqGenDao)
+    {
+        this.seqGenDao = seqGenDao;
     }
     
     /**
@@ -108,8 +122,7 @@ public class RegisterService
         String registerTime = JodaTimeUtil.getCurrentUTCTime(DateFormats.FORMAT_1);
         String profileId = UUIDUtil.generateProfileId();
         String accountId = UUIDUtil.generateAccountId();
-        // TODO UID
-        String uid = "1";
+        String uid = seqGenDao.nextVal(SeqIds.SEQ_UID);
         // user data
         User user = new User();
         

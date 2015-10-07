@@ -5,9 +5,23 @@
 	<typeAliases>
 		<typeAlias type="com.brave.backend.dao.model.Config" alias="Config" />
 		<typeAlias type="com.brave.backend.dao.model.Account" alias="Account" />
+		<typeAlias type="com.brave.backend.dao.model.User" alias="User" />
+		<typeAlias type="com.brave.backend.dao.model.Profile" alias="Profile" />
+		<typeAlias type="com.brave.backend.dao.model.Msg" alias="Msg" />
+		<typeAlias type="com.brave.backend.dao.model.MsgQueryCondition"
+			alias="MsgQueryCondition" />
+		<typeAlias type="com.brave.backend.dao.model.Comment" alias="Comment" />
+		<typeAlias type="com.brave.backend.dao.model.CommentQueryCondition"
+			alias="CommentQueryCondition" />
+		<typeAlias type="com.brave.backend.dao.model.SeqGen" alias="SeqGen" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/config-dao.xml" />
 		<mapper resource="dao/mapper/account-dao.xml" />
+		<mapper resource="dao/mapper/user-dao.xml" />
+		<mapper resource="dao/mapper/profile-dao.xml" />
+		<mapper resource="dao/mapper/msg-dao.xml" />
+		<mapper resource="dao/mapper/comment-dao.xml" />
+		<mapper resource="dao/mapper/seqgen-dao.xml" />
 	</mappers>
 </configuration>
