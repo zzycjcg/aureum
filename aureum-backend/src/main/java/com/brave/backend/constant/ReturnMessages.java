@@ -1,14 +1,13 @@
 package com.brave.backend.constant;
 
 /**
- * The Interface ReturnMessages.
+ * 返回描述.
  *
  * @author zhiyong zhu at 2015-10-7
  * @since v0.0.1
  */
 public interface ReturnMessages
 {
-    
     /** The E0000. */
     String E0000 = "Success";
     

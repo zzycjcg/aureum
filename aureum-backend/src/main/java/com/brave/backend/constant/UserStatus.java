@@ -1,7 +1,7 @@
 package com.brave.backend.constant;
 
 /**
- * The Interface UserStatus.
+ * 用户状态.
  *
  * @author zhiyong zhu at 2015-10-7
  * @since v0.0.1

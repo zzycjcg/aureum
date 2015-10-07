@@ -3,7 +3,7 @@ package com.brave.backend.constant;
 import com.brave.backend.resource.message.IResponse;
 
 /**
- * The Interface UsefulResponses.
+ * 几种典型场景的返回码和返回描述.
  *
  * @author zhiyong zhu at 2015-10-7
  * @since v0.0.1
