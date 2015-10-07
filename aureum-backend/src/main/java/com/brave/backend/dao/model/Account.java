@@ -1,5 +1,7 @@
 package com.brave.backend.dao.model;
 
+import java.util.UUID;
+
 /**
  * The Class Account.
  *
@@ -88,5 +90,10 @@ public class Account
         builder.append(uid);
         builder.append("]");
         return builder.toString();
+    }
+    
+    public static void main(String[] args)
+    {
+        System.out.println(UUID.randomUUID().toString().length());
     }
 }

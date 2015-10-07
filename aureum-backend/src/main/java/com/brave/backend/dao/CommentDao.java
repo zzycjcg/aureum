@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.brave.backend.dao.model.Comment;
 import com.brave.backend.dao.model.CommentQueryCondition;
-import com.brave.backend.dao.model.CommentWithContent;
 import com.brave.foundation.dao.BaseDao;
 
 /**
@@ -22,5 +21,5 @@ public interface CommentDao extends BaseDao<Comment>
      * @param condition the condition
      * @return the list
      */
-    List<CommentWithContent> pagingQuery(CommentQueryCondition condition);
+    List<Comment> pagingQuery(CommentQueryCondition condition);
 }

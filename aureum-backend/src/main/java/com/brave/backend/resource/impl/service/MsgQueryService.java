@@ -6,8 +6,8 @@ import com.brave.backend.constant.ReturnCodes;
 import com.brave.backend.constant.ReturnMessages;
 import com.brave.backend.container.ApplicationContextHolder;
 import com.brave.backend.dao.MsgDao;
+import com.brave.backend.dao.model.Msg;
 import com.brave.backend.dao.model.MsgQueryCondition;
-import com.brave.backend.dao.model.MsgWithContent;
 import com.brave.backend.resource.message.QueryMsgRequest;
 import com.brave.backend.resource.message.QueryMsgResponse;
 import com.brave.backend.util.PagingQueryUtil;
@@ -74,7 +74,7 @@ public class MsgQueryService
         int[] startAndEnd = PagingQueryUtil.calculateIndex(queryMsgRequest.getNumPerPage(), queryMsgRequest.getPage());
         condition.setStart(startAndEnd[0]);
         condition.setEnd(startAndEnd[1]);
-        List<MsgWithContent> msgs = msgDao.pagingQuery(condition);
+        List<Msg> msgs = msgDao.pagingQuery(condition);
         int count = msgDao.queryCount(condition);
         response.setMsgs(msgs);
         response.setCount(count);

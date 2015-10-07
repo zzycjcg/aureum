@@ -11,11 +11,14 @@ public class Msg
     /** The msg id. */
     protected String msgId;
     
-    /** The content id. */
-    protected String contentId;
-    
     /** The uid. */
     protected String uid;
+    
+    /** The text. */
+    protected String text;
+    
+    /** The multi media. */
+    protected String multiMedia;
     
     /** The create time. */
     protected String createTime;
@@ -41,26 +44,6 @@ public class Msg
     public void setMsgId(String msgId)
     {
         this.msgId = msgId;
-    }
-    
-    /**
-     * Gets the content id.
-     *
-     * @return the content id
-     */
-    public String getContentId()
-    {
-        return contentId;
-    }
-    
-    /**
-     * Sets the content id.
-     *
-     * @param contentId the new content id
-     */
-    public void setContentId(String contentId)
-    {
-        this.contentId = contentId;
     }
     
     /**
@@ -123,6 +106,46 @@ public class Msg
         this.updateTime = updateTime;
     }
     
+    /**
+     * Gets the text.
+     *
+     * @return the text
+     */
+    public String getText()
+    {
+        return text;
+    }
+    
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(String text)
+    {
+        this.text = text;
+    }
+    
+    /**
+     * Gets the multi media.
+     *
+     * @return the multi media
+     */
+    public String getMultiMedia()
+    {
+        return multiMedia;
+    }
+    
+    /**
+     * Sets the multi media.
+     *
+     * @param multiMedia the new multi media
+     */
+    public void setMultiMedia(String multiMedia)
+    {
+        this.multiMedia = multiMedia;
+    }
+    
     /** {@inheritDoc} */
     
     @Override
@@ -131,10 +154,12 @@ public class Msg
         StringBuilder builder = new StringBuilder();
         builder.append("Msg [msgId=");
         builder.append(msgId);
-        builder.append(", contentId=");
-        builder.append(contentId);
         builder.append(", uid=");
         builder.append(uid);
+        builder.append(", text=");
+        builder.append(text);
+        builder.append(", multiMedia=");
+        builder.append(multiMedia);
         builder.append(", createTime=");
         builder.append(createTime);
         builder.append(", updateTime=");

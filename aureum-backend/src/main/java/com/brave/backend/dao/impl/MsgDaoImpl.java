@@ -5,7 +5,6 @@ import java.util.List;
 import com.brave.backend.dao.MsgDao;
 import com.brave.backend.dao.model.Msg;
 import com.brave.backend.dao.model.MsgQueryCondition;
-import com.brave.backend.dao.model.MsgWithContent;
 import com.brave.foundation.dao.impl.BaseDaoImpl;
 
 /**
@@ -20,7 +19,7 @@ public class MsgDaoImpl extends BaseDaoImpl<Msg> implements MsgDao
     /** {@inheritDoc} */
     
     @Override
-    public List<MsgWithContent> pagingQuery(MsgQueryCondition condition)
+    public List<Msg> pagingQuery(MsgQueryCondition condition)
     {
         return sqlSession.selectList(namespace + ".pagingQuery", condition);
     }

@@ -5,7 +5,6 @@ import com.brave.backend.constant.ReturnMessages;
 import com.brave.backend.container.ApplicationContextHolder;
 import com.brave.backend.dao.CommentDao;
 import com.brave.backend.dao.model.Comment;
-import com.brave.backend.dao.model.Content;
 import com.brave.backend.resource.message.AddCommentRequest;
 import com.brave.backend.resource.message.AddCommentResponse;
 import com.brave.backend.util.JodaTimeUtil;
@@ -13,7 +12,6 @@ import com.brave.backend.util.JodaTimeUtil.DateFormats;
 import com.brave.backend.util.JsonUtil;
 import com.brave.backend.util.SessionAttributesUtil;
 import com.brave.backend.util.UUIDUtil;
-import com.brave.foundation.dao.BaseDao;
 
 /**
  * The Class CommentAddService.
@@ -24,8 +22,6 @@ import com.brave.foundation.dao.BaseDao;
 public class CommentAddService
 {
     private CommentDao commentDao;
-    
-    private BaseDao<Content> contentDao;
     
     private static CommentAddService instance;
     
@@ -71,16 +67,6 @@ public class CommentAddService
     }
     
     /**
-     * Sets the content dao.
-     *
-     * @param contentDao the new content dao
-     */
-    public void setContentDao(BaseDao<Content> contentDao)
-    {
-        this.contentDao = contentDao;
-    }
-    
-    /**
      * Execute.
      *
      * @param addCommentRequest the add comment request
@@ -98,34 +84,21 @@ public class CommentAddService
             return response;
         }
         String commentId = UUIDUtil.generateCommentId();
-        String contentId = UUIDUtil.generateContentId();
         
         // comment data
         Comment comment = new Comment();
         comment.setCommentId(commentId);
-        comment.setContentId(contentId);
         comment.setCreateTime(JodaTimeUtil.getCurrentUTCTime(DateFormats.FORMAT_1));
         comment.setMsgId(addCommentRequest.getComment().getMsgId());
         comment.setUid(uid);
+        comment.setText(addCommentRequest.getComment().getContent().getText());
+        comment.setMultiMedia(JsonUtil.toJson(addCommentRequest.getComment().getContent().getImageUrls()));
         
-        // content data
-        Content content = new Content();
-        content.setContentId(contentId);
-        content.setText(addCommentRequest.getComment().getContent().getText());
-        content.setMultiMedia(JsonUtil.toJson(addCommentRequest.getComment().getContent().getImageUrls()));
-        
-        operateDB(comment, content);
+        commentDao.insert(comment);
         
         response.setCommentId(commentId);
         response.setResultCode(ReturnCodes.E0000);
         response.setResultMessage(ReturnMessages.E0000);
         return response;
-    }
-    
-    // TODO  事务
-    private void operateDB(Comment comment, Content content)
-    {
-        contentDao.insert(content);
-        commentDao.insert(comment);
     }
 }

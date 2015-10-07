@@ -6,7 +6,7 @@ package com.brave.backend.resource.message;
  * @author zhiyong zhu at 2015-10-6
  * @since v0.0.1
  */
-public abstract class CommonResponse
+public abstract class CommonResponse implements IResponse
 {
     
     /** The result code. */
@@ -20,6 +20,7 @@ public abstract class CommonResponse
      *
      * @return the result code
      */
+    @Override
     public String getResultCode()
     {
         return resultCode;
@@ -40,6 +41,7 @@ public abstract class CommonResponse
      *
      * @return the result message
      */
+    @Override
     public String getResultMessage()
     {
         return resultMessage;

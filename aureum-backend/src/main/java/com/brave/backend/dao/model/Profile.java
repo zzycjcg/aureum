@@ -10,6 +10,8 @@ public class Profile
 {
     private String profileId;
     
+    private String uid;
+    
     private String username;
     
     private String email;
@@ -36,6 +38,26 @@ public class Profile
     public void setProfileId(String profileId)
     {
         this.profileId = profileId;
+    }
+    
+    /**
+     * Gets the uid.
+     *
+     * @return the uid
+     */
+    public String getUid()
+    {
+        return uid;
+    }
+    
+    /**
+     * Sets the uid.
+     *
+     * @param uid the new uid
+     */
+    public void setUid(String uid)
+    {
+        this.uid = uid;
     }
     
     /**
@@ -126,6 +148,8 @@ public class Profile
         StringBuilder builder = new StringBuilder();
         builder.append("Profile [profileId=");
         builder.append(profileId);
+        builder.append(", uid=");
+        builder.append(uid);
         builder.append(", username=");
         builder.append(username);
         builder.append(", email=");

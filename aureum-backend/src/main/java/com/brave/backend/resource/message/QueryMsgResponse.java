@@ -2,7 +2,7 @@ package com.brave.backend.resource.message;
 
 import java.util.List;
 
-import com.brave.backend.dao.model.MsgWithContent;
+import com.brave.backend.dao.model.Msg;
 
 /**
  * The Class QueryMsgResponse.
@@ -12,7 +12,7 @@ import com.brave.backend.dao.model.MsgWithContent;
  */
 public class QueryMsgResponse extends CommonResponse
 {
-    private List<MsgWithContent> msgs;
+    private List<Msg> msgs;
     
     private int totalPages;
     
@@ -23,7 +23,7 @@ public class QueryMsgResponse extends CommonResponse
      *
      * @return the msgs
      */
-    public List<MsgWithContent> getMsgs()
+    public List<Msg> getMsgs()
     {
         return msgs;
     }
@@ -33,7 +33,7 @@ public class QueryMsgResponse extends CommonResponse
      *
      * @param msgs the new msgs
      */
-    public void setMsgs(List<MsgWithContent> msgs)
+    public void setMsgs(List<Msg> msgs)
     {
         this.msgs = msgs;
     }

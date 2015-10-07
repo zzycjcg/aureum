@@ -17,4 +17,10 @@ public interface ReturnMessages
     
     /** The E1002. */
     String E1002 = "您必须登录才能操作";
+    
+    /** The E9001. */
+    String E9001 = "数据库异常";
+    
+    /** The E9999. */
+    String E9999 = "系统异常";
 }

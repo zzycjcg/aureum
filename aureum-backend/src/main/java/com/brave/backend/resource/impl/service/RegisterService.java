@@ -118,12 +118,12 @@ public class RegisterService
         // TODO 不可逆加密
         user.setPassword(registerRequest.getPassword());
         user.setStatus(UserStatus.NORMAL);
-        user.setProfileId(profileId);
         
         // profile data
         Profile profile = new Profile();
         profile.setProfileId(profileId);
         profile.setEmail(registerRequest.getEmail());
+        profile.setUid(uid);
         
         // account data
         Account account = new Account();
@@ -148,8 +148,8 @@ public class RegisterService
     // TODO 事务
     private void operateDB(User user, Profile profile, Account account)
     {
-        profileDao.insert(profile);
         userDao.insert(user);
+        profileDao.insert(profile);
         accountDao.insert(account);
     }
     

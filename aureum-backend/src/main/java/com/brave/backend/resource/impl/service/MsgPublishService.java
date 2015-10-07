@@ -4,7 +4,6 @@ import com.brave.backend.constant.ReturnCodes;
 import com.brave.backend.constant.ReturnMessages;
 import com.brave.backend.container.ApplicationContextHolder;
 import com.brave.backend.dao.MsgDao;
-import com.brave.backend.dao.model.Content;
 import com.brave.backend.dao.model.Msg;
 import com.brave.backend.resource.message.PublishMsgRequest;
 import com.brave.backend.resource.message.PublishMsgResponse;
@@ -13,7 +12,6 @@ import com.brave.backend.util.JodaTimeUtil.DateFormats;
 import com.brave.backend.util.JsonUtil;
 import com.brave.backend.util.SessionAttributesUtil;
 import com.brave.backend.util.UUIDUtil;
-import com.brave.foundation.dao.BaseDao;
 
 /**
  * The Class MsgPublishService.
@@ -27,9 +25,6 @@ public class MsgPublishService
     /** The msg dao. */
     private MsgDao msgDao;
     
-    /** The content dao. */
-    private BaseDao<Content> contentDao;
-    
     private static MsgPublishService instance;
     
     /**
@@ -40,16 +35,6 @@ public class MsgPublishService
     public void setMsgDao(MsgDao msgDao)
     {
         this.msgDao = msgDao;
-    }
-    
-    /**
-     * Sets the content dao.
-     *
-     * @param contentDao the new content dao
-     */
-    public void setContentDao(BaseDao<Content> contentDao)
-    {
-        this.contentDao = contentDao;
     }
     
     /**
@@ -100,37 +85,19 @@ public class MsgPublishService
             response.setResultMessage(ReturnMessages.E1002);
             return response;
         }
-        String contentId = UUIDUtil.generateContentId();
-        Content content = new Content();
-        content.setText(publishMsgRequest.getContent().getText());
-        content.setMultiMedia(JsonUtil.toJson(publishMsgRequest.getContent().getImageUrls()));
-        content.setContentId(contentId);
-        
         String msgId = UUIDUtil.generateMsgId();
         Msg msg = new Msg();
-        msg.setContentId(contentId);
         msg.setMsgId(msgId);
         msg.setCreateTime(JodaTimeUtil.getCurrentUTCTime(DateFormats.FORMAT_1));
         msg.setUid(uid);
+        msg.setText(publishMsgRequest.getContent().getText());
+        msg.setMultiMedia(JsonUtil.toJson(publishMsgRequest.getContent().getImageUrls()));
         
-        operateDB(msg, content);
+        msgDao.insert(msg);
         
         response.setMsgId(msgId);
         response.setResultCode(ReturnCodes.E0000);
         response.setResultMessage(ReturnMessages.E0000);
         return response;
-    }
-    
-    /**
-     * Operate db.
-     *
-     * @param msg the msg
-     * @param content the content
-     */
-    // TODO  事务
-    private void operateDB(Msg msg, Content content)
-    {
-        contentDao.insert(content);
-        msgDao.insert(msg);
     }
 }

@@ -2,7 +2,7 @@ package com.brave.backend.resource.message;
 
 import java.util.List;
 
-import com.brave.backend.dao.model.CommentWithContent;
+import com.brave.backend.dao.model.Comment;
 
 /**
  * The Class QueryCommentResponse.
@@ -12,7 +12,7 @@ import com.brave.backend.dao.model.CommentWithContent;
  */
 public class QueryCommentResponse extends CommonResponse
 {
-    private List<CommentWithContent> comments;
+    private List<Comment> comments;
     
     private int totalPages;
     
@@ -23,7 +23,7 @@ public class QueryCommentResponse extends CommonResponse
      *
      * @return the comments
      */
-    public List<CommentWithContent> getComments()
+    public List<Comment> getComments()
     {
         return comments;
     }
@@ -33,7 +33,7 @@ public class QueryCommentResponse extends CommonResponse
      *
      * @param comments the new comments
      */
-    public void setComments(List<CommentWithContent> comments)
+    public void setComments(List<Comment> comments)
     {
         this.comments = comments;
     }
@@ -77,6 +77,8 @@ public class QueryCommentResponse extends CommonResponse
     {
         this.count = count;
     }
+    
+    /** {@inheritDoc} */
     
     @Override
     public String toString()

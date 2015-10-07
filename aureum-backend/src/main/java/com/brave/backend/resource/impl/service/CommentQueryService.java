@@ -6,8 +6,8 @@ import com.brave.backend.constant.ReturnCodes;
 import com.brave.backend.constant.ReturnMessages;
 import com.brave.backend.container.ApplicationContextHolder;
 import com.brave.backend.dao.CommentDao;
+import com.brave.backend.dao.model.Comment;
 import com.brave.backend.dao.model.CommentQueryCondition;
-import com.brave.backend.dao.model.CommentWithContent;
 import com.brave.backend.resource.message.QueryCommentRequest;
 import com.brave.backend.resource.message.QueryCommentResponse;
 import com.brave.backend.util.PagingQueryUtil;
@@ -82,7 +82,7 @@ public class CommentQueryService
         condition.setStart(startAndEnd[0]);
         condition.setEnd(startAndEnd[1]);
         condition.setMsgId(queryCommentRequest.getMsgId());
-        List<CommentWithContent> comments = commentDao.pagingQuery(condition);
+        List<Comment> comments = commentDao.pagingQuery(condition);
         int count = commentDao.queryCount(condition);
         QueryCommentResponse response = new QueryCommentResponse();
         response.setComments(comments);

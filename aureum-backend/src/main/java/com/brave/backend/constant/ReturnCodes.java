@@ -24,7 +24,10 @@ public interface ReturnCodes
     /** 用户未登录. */
     String E1004 = "1004";
     
-    /** The E9001. */
+    /** 数据库操作失败. */
     String E9001 = "9001";
+    
+    /** 未知错误. */
+    String E9999 = "9999";
     
 }

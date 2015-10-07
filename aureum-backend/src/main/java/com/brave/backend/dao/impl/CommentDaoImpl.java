@@ -5,7 +5,6 @@ import java.util.List;
 import com.brave.backend.dao.CommentDao;
 import com.brave.backend.dao.model.Comment;
 import com.brave.backend.dao.model.CommentQueryCondition;
-import com.brave.backend.dao.model.CommentWithContent;
 import com.brave.foundation.dao.impl.BaseDaoImpl;
 
 /**
@@ -20,7 +19,7 @@ public class CommentDaoImpl extends BaseDaoImpl<Comment> implements CommentDao
     /** {@inheritDoc} */
     
     @Override
-    public List<CommentWithContent> pagingQuery(CommentQueryCondition condition)
+    public List<Comment> pagingQuery(CommentQueryCondition condition)
     {
         return sqlSession.selectList(namespace + ".pagingQuery", condition);
     }

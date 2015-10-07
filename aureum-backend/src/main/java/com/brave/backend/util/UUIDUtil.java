@@ -42,16 +42,6 @@ public abstract class UUIDUtil
     }
     
     /**
-     * Generate content id.
-     *
-     * @return the string
-     */
-    public static String generateContentId()
-    {
-        return generateUUID();
-    }
-    
-    /**
      * Generate msg id.
      *
      * @return the string

@@ -16,8 +16,6 @@ public class User
     
     private String password;
     
-    private String profileId;
-    
     /**
      * Gets the uid.
      *
@@ -98,26 +96,6 @@ public class User
         this.password = password;
     }
     
-    /**
-     * Gets the profile id.
-     *
-     * @return the profile id
-     */
-    public String getProfileId()
-    {
-        return profileId;
-    }
-    
-    /**
-     * Sets the profile id.
-     *
-     * @param profileId the new profile id
-     */
-    public void setProfileId(String profileId)
-    {
-        this.profileId = profileId;
-    }
-    
     /** {@inheritDoc} */
     
     @Override
@@ -132,8 +110,6 @@ public class User
         builder.append(status);
         builder.append(", password=");
         builder.append(password);
-        builder.append(", profileId=");
-        builder.append(profileId);
         builder.append("]");
         return builder.toString();
     }
