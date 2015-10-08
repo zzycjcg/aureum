@@ -12,8 +12,30 @@
 		<property name="namespace" value="mybatis.mapper.Config" />
 	</bean>
 
+	<bean id="backend.dao.UserDao" class="com.brave.backend.dao.impl.UserDaoImpl"
+		parent="foundation.dao.BaseDao">
+		<property name="namespace" value="mybatis.mapper.User" />
+	</bean>
 	<bean id="backend.dao.AccountDao" class="com.brave.backend.dao.impl.AccountDaoImpl"
 		parent="foundation.dao.BaseDao">
 		<property name="namespace" value="mybatis.mapper.Account" />
+	</bean>
+	<bean id="backend.dao.Profile" parent="foundation.dao.BaseDao">
+		<property name="namespace" value="mybatis.mapper.Profile" />
+	</bean>
+
+	<bean id="backend.dao.MsgDao" class="com.brave.backend.dao.impl.MsgDaoImpl"
+		parent="foundation.dao.BaseDao">
+		<property name="namespace" value="mybatis.mapper.Msg" />
+	</bean>
+
+	<bean id="backend.dao.CommentDao" class="com.brave.backend.dao.impl.CommentDaoImpl"
+		parent="foundation.dao.BaseDao">
+		<property name="namespace" value="mybatis.mapper.Comment" />
+	</bean>
+
+	<bean id="backend.dao.SeqGenDao" class="com.brave.backend.dao.impl.SeqGenDaoImpl"
+		parent="foundation.dao.BaseDao">
+		<property name="namespace" value="mybatis.mapper.SeqGen" />
 	</bean>
 </beans>

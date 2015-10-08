@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.SeqGen">
+
+	<resultMap type="SeqGen" id="seqGenResult">
+		<result column="SEQ_ID" property="seqId" />
+		<result column="SEQ_VAL" property="seqVal" />
+	</resultMap>
+
+	<sql id="seqGenCol">
+		SEQ_ID, SEQ_VAL
+	</sql>
+
+	<select id="query" resultMap="seqGenResult" parameterType="java.lang.String">
+		select
+		<include refid="seqGenCol" />
+		from
+		T_SEQ_GEN where SEQ_ID=#{seqId}
+	</select>
+
+	<update id="update" parameterType="SeqGen">
+		update T_SEQ_GEN set
+		SEQ_VAL=#{seqVal} where SEQ_ID=#{seqId}
+	</update>
+
+	<update id="next" parameterType="java.lang.String">
+		update T_SEQ_GEN set
+		SEQ_VAL=SEQ_VAL+1 where SEQ_ID=#{seqId}
+	</update>
+
+	<insert id="insert" parameterType="SeqGen">
+		insert into T_SEQ_GEN (
+		<include refid="seqGenCol" />
+		) values
+		(#{seqId}, #{seqVal})
+	</insert>
+</mapper>

@@ -7,6 +7,8 @@
 	<!-- 登录 -->
 	<bean id="backend.service.LoginService" class="com.brave.backend.resource.impl.service.LoginService"
 		<property name="instance" ref="backend.service.LoginService" />
+		<property name="accountDao" ref="backend.dao.AccountDao" />
+		<property name="userDao" ref="backend.dao.UserDao" />
 	</bean>
 
     <!-- 登出 -->
@@ -17,40 +19,50 @@
     <!-- 注册用户 -->
 	<bean id="backend.service.RegisterService" class="com.brave.backend.resource.impl.service.RegisterService"
 		<property name="instance" ref="backend.service.RegisterService" />
+		<property name="profileDao" ref="backend.dao.ProfileDao" />
+		<property name="accountDao" ref="backend.dao.AccountDao" />
+        <property name="userDao" ref="backend.dao.UserDao" />
 	</bean>
 
     <!-- 检查账号是否存在 -->
 	<bean id="backend.service.CheckAccountNameExistanceService" class="com.brave.backend.resource.impl.service.CheckAccountNameExistanceService"
 		<property name="instance" ref="backend.service.CheckAccountNameExistanceService" />
+		<property name="accountDao" ref="backend.dao.AccountDao" />
 	</bean>
 
      <!-- 发布消息 -->
 	<bean id="backend.service.MsgPublishService" class="com.brave.backend.resource.impl.service.MsgPublishService"
 		<property name="instance" ref="backend.service.MsgPublishService" />
+		<property name="msgDao" ref="backend.dao.MsgDao" />
 	</bean>
 
     <!-- 删除消息 -->
 	<bean id="backend.service.MsgDeleteService" class="com.brave.backend.resource.impl.service.MsgDeleteService"
 		<property name="instance" ref="backend.service.MsgDeleteService" />
+		<property name="msgDao" ref="backend.dao.MsgDao" />
 	</bean>
 	
 	<!-- 查询消息 -->
     <bean id="backend.service.MsgQueryService" class="com.brave.backend.resource.impl.service.MsgQueryService"
         <property name="instance" ref="backend.service.MsgQueryService" />
+        <property name="msgDao" ref="backend.dao.MsgDao" />
     </bean>
     
     <!-- 添加评论 -->
     <bean id="backend.service.CommentAddService" class="com.brave.backend.resource.impl.service.CommentAddService"
         <property name="instance" ref="backend.service.CommentAddService" />
+        <property name="commentDao" ref="backend.dao.commentDao" />
     </bean>
 
     <!-- 删除评论 -->
     <bean id="backend.service.CommentDeleteService" class="com.brave.backend.resource.impl.service.CommentDeleteService"
         <property name="instance" ref="backend.service.CommentDeleteService" />
+        <property name="commentDao" ref="backend.dao.commentDao" />
     </bean>
     
     <!-- 查询评论 -->
     <bean id="backend.service.CommentQueryService" class="com.brave.backend.resource.impl.service.CommentQueryService"
         <property name="instance" ref="backend.service.CommentQueryService" />
+        <property name="commentDao" ref="backend.dao.commentDao" />
     </bean>
 </beans>

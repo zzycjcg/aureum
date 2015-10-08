@@ -5,8 +5,9 @@
 	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
 	default-lazy-init="true" default-init-method="init">
 
-	<task:scheduler id="taskScheduler" pool-size="5"/>
+	<task:scheduler id="taskScheduler" pool-size="5" />
 	<task:scheduled-tasks scheduler="taskScheduler">
+		<!-- 每一个小时全量加载配置项到内存 -->
 		<task:scheduled ref="backend.base.ConfigFacade" method="reload"
-			cron="0 */1 * * * ?" />
+			cron="0 0 */1 * * ?" />
 </beans>
