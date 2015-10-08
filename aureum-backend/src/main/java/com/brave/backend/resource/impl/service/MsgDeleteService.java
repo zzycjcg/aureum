@@ -94,7 +94,7 @@ public class MsgDeleteService
      *
      * @param msgIds the msg ids
      */
-    // TODO 事务
+    // TODO 验证事务
     private void operateDB(List<String> msgIds, String uid)
     {
         if (CollectionUtils.isEmpty(msgIds))
@@ -105,7 +105,6 @@ public class MsgDeleteService
         {
             if (hasDelPermission(msgId, uid))
             {
-                // TODO 关联删除
                 msgDao.delete(msgId);
             }
         }

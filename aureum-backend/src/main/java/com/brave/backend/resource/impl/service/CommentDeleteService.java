@@ -89,7 +89,7 @@ public class CommentDeleteService
         return response;
     }
     
-    // TODO 事务
+    // TODO 验证事务
     private void operateDB(List<String> commentIds, String uid)
     {
         if (CollectionUtils.isEmpty(commentIds))
@@ -100,7 +100,6 @@ public class CommentDeleteService
         {
             if (hasDelPermission(commentId, uid))
             {
-                // TODO 关联删除
                 commentDao.delete(commentId);
             }
         }

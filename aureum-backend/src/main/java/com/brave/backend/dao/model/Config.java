@@ -59,36 +59,21 @@ public class Config
     /** {@inheritDoc} */
     
     @Override
-    public int hashCode()
-    {
-        // TODO
-        if (this.configName != null && this.configValue != null)
-        {
-            return this.configName.hashCode() ^ this.configValue.hashCode();
-        }
-        return configName.hashCode();
-    }
-    
-    /** {@inheritDoc} */
-    
-    @Override
     public boolean equals(Object other)
     {
-        
         // null will return false
         if (!(other instanceof Config))
         {
             return false;
         }
         
-        if (other.hashCode() == this.hashCode())
+        if (other == this)
         {
             return true;
         }
         
-        Config otherConfig = (Config)other;
-        return StringUtils.equals(this.configName, otherConfig.getConfigName())
-            && StringUtils.equals(this.configValue, otherConfig.getConfigValue());
+        return StringUtils.equals(this.configName, ((Config)other).getConfigName())
+            && StringUtils.equals(this.configValue, ((Config)other).getConfigValue());
     }
     
     /** {@inheritDoc} */

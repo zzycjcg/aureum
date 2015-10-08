@@ -158,7 +158,7 @@ public class RegisterService
      * @param profile the profile
      * @param account the account
      */
-    // TODO 事务
+    // TODO 验证事务
     private void operateDB(User user, Profile profile, Account account)
     {
         userDao.insert(user);
