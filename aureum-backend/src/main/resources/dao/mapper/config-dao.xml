@@ -5,12 +5,12 @@
 <mapper namespace="mybatis.mapper.Config">
 
 	<resultMap type="Config" id="configResult">
-		<result column="CONFIGNAME" property="configName" />
-		<result column="CONFIGVALUE" property="configValue" />
+		<result column="CONFIG_NAME" property="configName" />
+		<result column="CONFIG_VALUE" property="configValue" />
 	</resultMap>
 
 	<sql id="configCol">
-		CONFIGNAME, CONFIGVALUE
+		CONFIG_NAME, CONFIG_VALUE
 	</sql>
 
 	<select id="queryAll" resultMap="configResult">
@@ -24,13 +24,13 @@
 		select
 		<include refid="configCol" />
 		from
-		T_CONFIG where CONFIGNAME=#{configName}
+		T_CONFIG where CONFIG_NAME=#{configName}
 	</select>
 
 	<update id="update" parameterType="Config">
 		update T_CONFIG set
-		CONFIGVALUE=#{configValue} where
-		CONFIGNAME=#{configName}
+		CONFIG_VALUE=#{configValue} where
+		CONFIG_NAME=#{configName}
 	</update>
 
 	<insert id="insert" parameterType="Config">

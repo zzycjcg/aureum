@@ -36,7 +36,7 @@
 		</choose>
 	</sql>
 
-	<select id="queryAll" resultMap="accountResult">
+	<select id="queryAll" resultMap="commentResult">
 		select
 		<include refid="commentCol" />
 		from

@@ -31,7 +31,7 @@ public final class ApplicationContextHolder implements ApplicationContextAware
      *
      * @param instance the new instance
      */
-    protected static void setInstance(ApplicationContextHolder instance)
+    public static void setInstance(ApplicationContextHolder instance)
     {
         ApplicationContextHolder.instance = instance;
     }

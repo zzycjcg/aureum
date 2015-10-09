@@ -10,4 +10,5 @@
 		<!-- 每一个小时全量加载配置项到内存 -->
 		<task:scheduled ref="backend.base.ConfigFacade" method="reload"
 			cron="0 0 */1 * * ?" />
+	</task:scheduled-tasks>
 </beans>

@@ -137,6 +137,9 @@ public class RegisterService
         profile.setProfileId(profileId);
         profile.setEmail(registerRequest.getEmail());
         profile.setUid(uid);
+        profile.setUsername(registerRequest.getUsername());
+        profile.setBrief(registerRequest.getBrief());
+        profile.setMobilePhone(registerRequest.getMobilePhone());
         
         // account data
         Account account = new Account();

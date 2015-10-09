@@ -39,4 +39,18 @@ public class SeqGenDaoImpl extends BaseDaoImpl<SeqGen> implements SeqGenDao
         return seqGen.getSeqVal();
     }
     
+    /** {@inheritDoc} */
+    
+    @Override
+    public void setVal(String seqId, String seqVal)
+    {
+        SeqGen seqGen = querySingle(seqId);
+        if (seqGen == null)
+        {
+            throw new IllegalArgumentException("No this sequence found:" + seqId);
+        }
+        seqGen.setSeqVal(seqVal);
+        update(seqGen);
+    }
+    
 }

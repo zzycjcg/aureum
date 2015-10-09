@@ -24,4 +24,12 @@ public interface SeqGenDao
      * @return the string
      */
     String currentVal(String seqId);
+    
+    /**
+     * Sets the val.
+     *
+     * @param seqId the new val
+     * @param seqVal the seq val
+     */
+    void setVal(String seqId, String seqVal);
 }

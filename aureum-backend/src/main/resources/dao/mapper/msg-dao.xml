@@ -34,7 +34,7 @@
 		</choose>
 	</sql>
 
-	<select id="queryAll" resultMap="accountResult">
+	<select id="queryAll" resultMap="msgResult">
 		select
 		<include refid="msgCol" />
 		from

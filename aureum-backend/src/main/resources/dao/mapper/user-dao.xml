@@ -15,7 +15,7 @@
 		UID, CREATE_TIME, STATUS, PASSWORD
 	</sql>
 
-	<select id="queryAll" resultMap="accountResult">
+	<select id="queryAll" resultMap="userResult">
 		select
 		<include refid="userCol" />
 		from
@@ -43,4 +43,9 @@
 		) values
 		(#{uid}, #{createTime}, #{status}, #{password})
 	</insert>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from T_USER where
+		UID=#{uid}
+	</delete>
 </mapper>

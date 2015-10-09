@@ -20,7 +20,7 @@
 		parent="foundation.dao.BaseDao">
 		<property name="namespace" value="mybatis.mapper.Account" />
 	</bean>
-	<bean id="backend.dao.Profile" parent="foundation.dao.BaseDao">
+	<bean id="backend.dao.ProfileDao" parent="foundation.dao.BaseDao">
 		<property name="namespace" value="mybatis.mapper.Profile" />
 	</bean>
 
