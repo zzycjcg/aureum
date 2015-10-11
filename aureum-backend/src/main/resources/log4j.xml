@@ -43,20 +43,17 @@
 	<logger name="com.brave" additivity="false">
 		<level value="WARN" />
 		<appender-ref ref="DebugAppender" />
-		<appender-ref ref="ConsoleAppender" />
 	</logger>
 
 	<logger name="org.springframework" additivity="false">
 		<level value="WARN" />
 		<appender-ref ref="SpringAppender" />
-		<appender-ref ref="ConsoleAppender" />
 	</logger>
 
 	<!-- 下面是打印mybatis语句的配置 -->
 	<logger name="org.mybatis.spring" additivity="false">
 		<level value="WARN" />
 		<appender-ref ref="MybatisAppender" />
-		<appender-ref ref="ConsoleAppender" />
 	</logger>
 	<logger name="org.apache.ibatis" additivity="false">
 		<level value="WARN" />

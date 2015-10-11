@@ -6,7 +6,7 @@ package com.brave.backend.resource.message;
  * @author zhiyong zhu at 2015-10-7
  * @since v0.0.1
  */
-public class RegisterRequest
+public class RegisterRequest extends CommonRequest
 {
     private String username;
     
