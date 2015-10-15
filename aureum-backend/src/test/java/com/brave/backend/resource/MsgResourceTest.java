@@ -22,6 +22,8 @@ import com.brave.backend.constant.SeqIds;
 import com.brave.backend.dao.MsgDao;
 import com.brave.backend.dao.SeqGenDao;
 import com.brave.backend.dao.UserDao;
+import com.brave.backend.resource.message.CheckAccountExistanceRequest;
+import com.brave.backend.resource.message.CheckAccountExistanceResponse;
 import com.brave.backend.resource.message.DeleteMsgRequest;
 import com.brave.backend.resource.message.DeleteMsgResponse;
 import com.brave.backend.resource.message.LoginRequest;
@@ -62,6 +64,8 @@ public class MsgResourceTest
     
     private final String password = "abcd1234";
     
+    private final String username = "zzycjcg";
+    
     private String msgId;
     
     /**
@@ -71,7 +75,7 @@ public class MsgResourceTest
     public void prepare()
     {
         registerRequest = new RegisterRequest();
-        registerRequest.setUsername("zzycjcg");
+        registerRequest.setUsername(username);
         registerRequest.setEmail(email);
         registerRequest.setMobilePhone("18260082239");
         registerRequest.setPassword(password);
@@ -124,10 +128,39 @@ public class MsgResourceTest
     
     private void doRegister()
     {
+        String email = genAvaiableEmail();
+        if (exists(email))
+        {
+            return;
+        }
+        registerRequest.setEmail(email);
         RegisterResponse registerResponse = userResource.register(registerRequest);
         Assert.assertTrue(registerResponse != null && StringUtils.isNotEmpty(uid = registerResponse.getUid()));
         Assert.assertEquals(ReturnCodes.E0000, registerResponse.getResultCode());
         Assert.assertEquals(ReturnMessages.E0000, registerResponse.getResultMessage());
+    }
+    
+    private String genAvaiableEmail()
+    {
+        int index = 1;
+        String email = this.email;
+        while (exists(email))
+        {
+            email = username + String.valueOf(index++) + "@qq.com";
+        }
+        return email;
+    }
+    
+    private boolean exists(String email)
+    {
+        CheckAccountExistanceRequest request = new CheckAccountExistanceRequest();
+        request.setAccountName(email);
+        CheckAccountExistanceResponse checkAccountExistanceResponse = userResource.checkAccountNameExistance(request);
+        Assert.assertTrue(checkAccountExistanceResponse != null);
+        Assert.assertTrue(checkAccountExistanceResponse != null);
+        Assert.assertEquals(ReturnCodes.E0000, checkAccountExistanceResponse.getResultCode());
+        Assert.assertEquals(ReturnMessages.E0000, checkAccountExistanceResponse.getResultMessage());
+        return checkAccountExistanceResponse.isExist();
     }
     
     private void doLogin()
