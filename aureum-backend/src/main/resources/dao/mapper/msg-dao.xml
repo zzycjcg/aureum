@@ -72,4 +72,9 @@
 		(#{msgId}, #{uid}, #{createTime}, #{updateTime}, #{text},
 		#{multiMedia})
 	</insert>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from T_MSG where
+		MSG_ID=#{msgId}
+	</delete>
 </mapper>
