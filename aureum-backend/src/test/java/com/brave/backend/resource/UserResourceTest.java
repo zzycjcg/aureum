@@ -145,39 +145,10 @@ public class UserResourceTest
     
     private void doRegister()
     {
-        String email = genAvaiableEmail();
-        if (exists(email))
-        {
-            return;
-        }
-        registerRequest.setEmail(email);
         RegisterResponse registerResponse = userResource.register(registerRequest);
         Assert.assertTrue(registerResponse != null && StringUtils.isNotEmpty(uid = registerResponse.getUid()));
         Assert.assertEquals(ReturnCodes.E0000, registerResponse.getResultCode());
         Assert.assertEquals(ReturnMessages.E0000, registerResponse.getResultMessage());
-    }
-    
-    private String genAvaiableEmail()
-    {
-        int index = 1;
-        String email = this.email;
-        while (exists(email))
-        {
-            email = username + String.valueOf(index++) + "@qq.com";
-        }
-        return email;
-    }
-    
-    private boolean exists(String email)
-    {
-        CheckAccountExistanceRequest request = new CheckAccountExistanceRequest();
-        request.setAccountName(email);
-        CheckAccountExistanceResponse checkAccountExistanceResponse = userResource.checkAccountNameExistance(request);
-        Assert.assertTrue(checkAccountExistanceResponse != null);
-        Assert.assertTrue(checkAccountExistanceResponse != null);
-        Assert.assertEquals(ReturnCodes.E0000, checkAccountExistanceResponse.getResultCode());
-        Assert.assertEquals(ReturnMessages.E0000, checkAccountExistanceResponse.getResultMessage());
-        return checkAccountExistanceResponse.isExist();
     }
     
     private void doLogout()
