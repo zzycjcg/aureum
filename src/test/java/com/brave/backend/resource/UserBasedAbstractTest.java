@@ -12,8 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.brave.backend.constant.ReturnCodes;
-import com.brave.backend.constant.ReturnMessages;
 import com.brave.backend.resource.message.CheckAccountExistanceRequest;
 import com.brave.backend.resource.message.CheckAccountExistanceResponse;
 import com.brave.backend.resource.message.LoginRequest;
@@ -35,13 +33,15 @@ import com.brave.backend.util.SessionHolder;
 @Transactional
 public abstract class UserBasedAbstractTest
 {
-    
     /** The user resource. */
     @Autowired
     protected UserResource userResource;
     
     /** The register request. */
     protected static RegisterRequest registerRequest;
+    
+    /** The uid. */
+    protected String uid;
     
     /** The Constant email. */
     protected static final String email = "zzycjcg@qq.com";
@@ -79,10 +79,9 @@ public abstract class UserBasedAbstractTest
         loginRequest.setPassword(password);
         HttpSession httpSession = new MockHttpSession();
         SessionHolder.setSession(httpSession);
-        LoginResponse loginResponse = userResource.login(loginRequest);
-        Assert.assertTrue(loginResponse != null && StringUtils.isNotEmpty(loginResponse.getUid()));
-        Assert.assertEquals(ReturnCodes.E0000, loginResponse.getResultCode());
-        Assert.assertEquals(ReturnMessages.E0000, loginResponse.getResultMessage());
+        LoginResponse response = userResource.login(loginRequest);
+        AssertUtil.assertResponseValid(response);
+        Assert.assertTrue(StringUtils.isNotEmpty(response.getUid()));
     }
     
     /**
@@ -90,10 +89,9 @@ public abstract class UserBasedAbstractTest
      */
     protected void doRegister()
     {
-        RegisterResponse registerResponse = userResource.register(registerRequest);
-        Assert.assertTrue(registerResponse != null && StringUtils.isNotEmpty(registerResponse.getUid()));
-        Assert.assertEquals(ReturnCodes.E0000, registerResponse.getResultCode());
-        Assert.assertEquals(ReturnMessages.E0000, registerResponse.getResultMessage());
+        RegisterResponse response = userResource.register(registerRequest);
+        AssertUtil.assertResponseValid(response);
+        Assert.assertTrue(StringUtils.isNotEmpty(uid = response.getUid()));
     }
     
     /**
@@ -101,22 +99,21 @@ public abstract class UserBasedAbstractTest
      */
     protected void doLogout()
     {
-        LogoutResponse logoutResponse = userResource.logout();
-        Assert.assertTrue(logoutResponse != null);
-        Assert.assertEquals(ReturnCodes.E0000, logoutResponse.getResultCode());
-        Assert.assertEquals(ReturnMessages.E0000, logoutResponse.getResultMessage());
+        LogoutResponse response = userResource.logout();
+        AssertUtil.assertResponseValid(response);
     }
     
     /**
      * Do check account name existance.
+     *
+     * @param accountName the account name
      */
-    protected void doCheckAccountNameExistance()
+    protected void doCheckAccountNameExistance(String accountName)
     {
         CheckAccountExistanceRequest request = new CheckAccountExistanceRequest();
         request.setAccountName(accountName);
         CheckAccountExistanceResponse response = userResource.checkAccountNameExistance(request);
-        Assert.assertTrue(response != null && response.isExist());
-        Assert.assertEquals(ReturnCodes.E0000, response.getResultCode());
-        Assert.assertEquals(ReturnMessages.E0000, response.getResultMessage());
+        AssertUtil.assertResponseValid(response);
+        Assert.assertTrue(response.isExist());
     }
 }

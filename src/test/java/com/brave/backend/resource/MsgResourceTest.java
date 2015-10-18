@@ -11,8 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.brave.backend.constant.ReturnCodes;
-import com.brave.backend.constant.ReturnMessages;
 import com.brave.backend.resource.message.DeleteMsgRequest;
 import com.brave.backend.resource.message.DeleteMsgResponse;
 import com.brave.backend.resource.message.PublishMsgRequest;
@@ -32,8 +30,6 @@ public class MsgResourceTest extends UserBasedAbstractTest
     @Autowired
     private MsgResource msgResource;
     
-    private String uid;
-    
     private final Map<Integer, String> msgIdMap = new HashMap<Integer, String>();
     
     /**
@@ -44,16 +40,6 @@ public class MsgResourceTest extends UserBasedAbstractTest
     {
         doRegister();
         doLogin();
-    }
-    
-    /**
-     * Test publish msg.
-     */
-    @Test
-    public void testPublishMsg()
-    {
-        doPublishMsg(0);
-        doDeleteMsg();
     }
     
     /**
@@ -72,28 +58,46 @@ public class MsgResourceTest extends UserBasedAbstractTest
     @Test
     public void testQueryMsg()
     {
-        doQueryMsg();
+        int count = 5;
+        doPublishMsg(count);
+        doQueryMsg(count);
         doDeleteMsg();
     }
     
-    private void doPublishMsg(int index)
+    private void doPublishMsg(int count)
     {
-        Content content = new Content();
-        content.setText("[msg" + String.valueOf(index) + "]Hi! This my first msg. Welcome to brave msg-sys.");
-        List<String> imageUrls = new ArrayList<String>();
-        imageUrls.add("[msg" + String.valueOf(index) + "]http://www.baidu.com/img/bdlogo.png");
-        imageUrls.add(
-            "[msg" + String.valueOf(index) + "]https://upload.wikimedia.org/wikipedia/en/d/de/Alibaba_Group_Logo.png");
-        content.setImageUrls(imageUrls);
-        PublishMsgRequest request = new PublishMsgRequest();
-        request.setContent(content);
-        PublishMsgResponse response = msgResource.publish(request);
-        Assert.assertTrue(response != null);
-        Assert.assertEquals(ReturnCodes.E0000, response.getResultCode());
-        Assert.assertEquals(ReturnMessages.E0000, response.getResultMessage());
-        String msgId = null;
-        Assert.assertTrue(StringUtils.isNotEmpty(msgId = response.getMsgId()));
-        msgIdMap.put(index, msgId);
+        Content content = null;
+        List<String> imageUrls = null;
+        PublishMsgRequest request = null;
+        PublishMsgResponse response = null;
+        for (int i = 1; i <= count; i++)
+        {
+            content = new Content();
+            content.setText("[msg" + String.valueOf(i) + "]Hi! This my first msg. Welcome to brave msg-sys.");
+            imageUrls = new ArrayList<String>();
+            imageUrls.add("[msg" + String.valueOf(i) + "]http://www.baidu.com/img/bdlogo.png");
+            imageUrls.add(
+                "[msg" + String.valueOf(i) + "]https://upload.wikimedia.org/wikipedia/en/d/de/Alibaba_Group_Logo.png");
+            content.setImageUrls(imageUrls);
+            request = new PublishMsgRequest();
+            request.setContent(content);
+            response = msgResource.publish(request);
+            AssertUtil.assertResponseValid(response);
+            Assert.assertTrue(StringUtils.isNotEmpty(response.getMsgId()));
+            msgIdMap.put(i, response.getMsgId());
+            if (count > 1)
+            {
+                try
+                {
+                    // 每隔2s发布一条消息
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     
     private void doDeleteMsg()
@@ -103,42 +107,24 @@ public class MsgResourceTest extends UserBasedAbstractTest
         DeleteMsgRequest request = new DeleteMsgRequest();
         request.setMsgIds(msgIds);
         DeleteMsgResponse response = msgResource.delete(request);
-        Assert.assertTrue(response != null);
-        Assert.assertEquals(ReturnCodes.E0000, response.getResultCode());
-        Assert.assertEquals(ReturnMessages.E0000, response.getResultMessage());
+        AssertUtil.assertResponseValid(response);
         msgIdMap.clear();
     }
     
-    private void doQueryMsg()
+    private void doQueryMsg(int count)
     {
-        int count = 5;
-        // 发布5条消息
-        for (int i = 0; i < count; i++)
-        {
-            doPublishMsg(i);
-            try
-            {
-                // 每隔2s发布一条消息
-                Thread.sleep(2000);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
         QueryMsgRequest request = new QueryMsgRequest();
         request.setDesc(true);
         request.setNumPerPage(10);
         request.setPage(1);
-        request.setUid(uid);
+        request.setUid(super.uid);
         QueryMsgResponse response = msgResource.query(request);
-        Assert.assertTrue(response != null);
-        Assert.assertEquals(ReturnCodes.E0000, response.getResultCode());
-        Assert.assertEquals(ReturnMessages.E0000, response.getResultMessage());
+        AssertUtil.assertResponseValid(response);
         Assert.assertTrue(response.getCount() == count);
-        for (int i = 0; i < count; i++)
+        Assert.assertTrue(response.getTotalPages() == 1);
+        for (int i = 1; i <= count; i++)
         {
-            Assert.assertEquals(msgIdMap.get(count - 1 - i), response.getMsgs().get(i).getMsgId());
+            Assert.assertEquals(msgIdMap.get(count - i + 1), response.getMsgs().get(i - 1).getMsgId());
         }
     }
     
