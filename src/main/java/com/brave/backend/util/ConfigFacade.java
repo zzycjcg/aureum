@@ -1,5 +1,9 @@
+/*
+ * 
+ */
 package com.brave.backend.util;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +29,7 @@ public final class ConfigFacade
     
     private BaseDao<Config> configDao;
     
-    private Map<String, String> configMap = new HashMap<String, String>(0);
+    private Map<String, Config> configMap = Collections.emptyMap();
     
     /**
      * 调用该方法可以从数据库拉取全量配置到内存.
@@ -43,10 +47,10 @@ public final class ConfigFacade
         List<Config> allConfigs = configDao.queryAll();
         if (CollectionUtils.isNotEmpty(allConfigs))
         {
-            Map<String, String> temp = new HashMap<String, String>(32);
+            Map<String, Config> temp = new HashMap<String, Config>(32);
             for (Config config : allConfigs)
             {
-                temp.put(config.getConfigName(), config.getConfigValue());
+                temp.put(config.getConfigName(), config);
             }
             configMap = temp;
         }
@@ -91,13 +95,24 @@ public final class ConfigFacade
      */
     public String getConfig(String configName, String defaultValue)
     {
-        String value = configMap.get(configName);
+        Config value = configMap.get(configName);
         if (value == null)
         {
             log.info("no this config name found <{}>, use defaule value <{}>", configName, defaultValue);
             return defaultValue;
         }
-        return value;
+        return value.getConfigValue();
+    }
+    
+    /**
+     * Gets the config object.
+     *
+     * @param configName the config name
+     * @return the config object
+     */
+    public Config getConfigObject(String configName)
+    {
+        return configMap.get(configName);
     }
     
     /**

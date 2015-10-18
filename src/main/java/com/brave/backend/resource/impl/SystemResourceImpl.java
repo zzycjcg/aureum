@@ -1,5 +1,7 @@
 package com.brave.backend.resource.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,12 +47,19 @@ public class SystemResourceImpl implements SystemResource
     /** {@inheritDoc} */
     
     @Override
-    public Map<String, Object> getConfig(String configName)
+    public List<Config> getConfig(List<String> configNameList)
     {
-        Map<String, Object> map = new HashMap<String, Object>();
-        // test configure service
-        map.put(configName, ConfigFacade.getInstance().getConfig(configName));
-        return map;
+        if (CollectionUtils.isEmpty(configNameList))
+        {
+            return Collections.emptyList();
+        }
+        List<Config> configList = new ArrayList<Config>();
+        for (String configName : configNameList)
+        {
+            // 没有值的话塞入null
+            configList.add(ConfigFacade.getInstance().getConfigObject(configName));
+        }
+        return configList;
     }
     
     /** {@inheritDoc} */
@@ -60,20 +69,16 @@ public class SystemResourceImpl implements SystemResource
     {
         if (CollectionUtils.isEmpty(configs))
         {
-            log.warn("config list is null or empty.");
+            log.warn("No need to add any config: list is null or empty.");
             return;
         }
         for (Config config : configs)
         {
-            if ("mysql".equalsIgnoreCase(config.getConfigName()))
-            {
-                throw new IllegalArgumentException("illegal arg: mysql.");
-            }
             Config origin = configDao.querySingle(config.getConfigName());
             if (origin != null)
             {
                 configDao.update(config);
-                log.debug("update config: configName={}, replace configValue:{} with {}.",
+                log.info("update config: configName={}, replace configValue:{} with {}.",
                     config.getConfigName(),
                     origin.getConfigValue(),
                     config.getConfigValue());
@@ -94,7 +99,7 @@ public class SystemResourceImpl implements SystemResource
         {
             initPortalUrl();
         }
-        Map<String, Object> result = new HashMap<String, Object>(2);
+        Map<String, Object> result = new HashMap<String, Object>();
         result.put("httpUrl", this.httpUrl);
         result.put("httpsUrl", this.httpsUrl);
         return result;

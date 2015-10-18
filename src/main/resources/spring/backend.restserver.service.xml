@@ -57,20 +57,20 @@
 	<bean id="backend.service.CommentAddService"
 		class="com.brave.backend.resource.impl.service.CommentAddService">
 		<property name="instance" ref="backend.service.CommentAddService" />
-		<property name="commentDao" ref="backend.dao.commentDao" />
+		<property name="commentDao" ref="backend.dao.CommentDao" />
 	</bean>
 
 	<!-- 删除评论 -->
 	<bean id="backend.service.CommentDeleteService"
 		class="com.brave.backend.resource.impl.service.CommentDeleteService">
 		<property name="instance" ref="backend.service.CommentDeleteService" />
-		<property name="commentDao" ref="backend.dao.commentDao" />
+		<property name="commentDao" ref="backend.dao.CommentDao" />
 	</bean>
 
 	<!-- 查询评论 -->
 	<bean id="backend.service.CommentQueryService"
 		class="com.brave.backend.resource.impl.service.CommentQueryService">
 		<property name="instance" ref="backend.service.CommentQueryService" />
-		<property name="commentDao" ref="backend.dao.commentDao" />
+		<property name="commentDao" ref="backend.dao.CommentDao" />
 	</bean>
 </beans>

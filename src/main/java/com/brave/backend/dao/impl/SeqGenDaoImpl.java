@@ -14,7 +14,7 @@ public class SeqGenDaoImpl extends BaseDaoImpl<SeqGen> implements SeqGenDao
 {
     
     /** {@inheritDoc} */
-    // TODO  事务
+    
     @Override
     public String nextVal(String seqId)
     {
