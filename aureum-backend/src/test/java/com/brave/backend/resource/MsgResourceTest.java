@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,10 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.brave.backend.constant.ReturnCodes;
 import com.brave.backend.constant.ReturnMessages;
-import com.brave.backend.constant.SeqIds;
-import com.brave.backend.dao.MsgDao;
-import com.brave.backend.dao.SeqGenDao;
-import com.brave.backend.dao.UserDao;
 import com.brave.backend.resource.message.DeleteMsgRequest;
 import com.brave.backend.resource.message.DeleteMsgResponse;
 import com.brave.backend.resource.message.LoginRequest;
@@ -45,54 +41,52 @@ import com.brave.backend.util.SessionHolder;
  * @since v0.0.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/spring-beans.xml", "classpath:spring/backend.restserver.*.xml"})
+@ContextConfiguration({"classpath*:spring/spring-beans.xml", "classpath*:spring/backend.restserver.*.xml",
+    "classpath*:spring/test.*.xml"})
 @Transactional
 public class MsgResourceTest
 {
-    @Resource
+    @Autowired
     private MsgResource msgResource;
     
-    @Resource
+    @Autowired
     private UserResource userResource;
     
-    @Resource
-    private SeqGenDao seqGenDao;
-    
-    @Resource
-    private MsgDao msgDao;
-    
-    @Resource
-    private UserDao userDao;
-    
-    private RegisterRequest registerRequest;
+    private static RegisterRequest registerRequest;
     
     private String uid;
     
-    private final String email = "zzycjcg@qq.com";
+    private static final String email = "zzycjcg@qq.com";
     
-    private final String accountName = email;
+    private static final String accountName = email;
     
-    private final String password = "abcd1234";
+    private static final String password = "abcd1234";
     
-    private final String username = "zzycjcg";
+    private static final String username = "zzycjcg";
     
     private final Map<Integer, String> msgIdMap = new HashMap<Integer, String>();
-    
-    private String initSeqId;
     
     /**
      * Prepare.
      */
-    @Before
-    public void init()
+    @BeforeClass
+    public static void init()
     {
-        initSeqId = seqGenDao.currentVal(SeqIds.SEQ_UID);
         registerRequest = new RegisterRequest();
         registerRequest.setUsername(username);
         registerRequest.setEmail(email);
         registerRequest.setMobilePhone("18260082239");
         registerRequest.setPassword(password);
         registerRequest.setBrief("Hello, this is zhiyong zhu.");
+        
+    }
+    
+    /**
+     * Prepare.
+     */
+    @Before
+    public void prepare()
+    {
         doRegister();
         doLogin();
     }
@@ -212,19 +206,5 @@ public class MsgResourceTest
         Assert.assertTrue(loginResponse != null && StringUtils.isNotEmpty(loginResponse.getUid()));
         Assert.assertEquals(ReturnCodes.E0000, loginResponse.getResultCode());
         Assert.assertEquals(ReturnMessages.E0000, loginResponse.getResultMessage());
-    }
-    
-    /**
-     * Clean.
-     */
-    @After
-    public void destory()
-    {
-        seqGenDao.setVal(SeqIds.SEQ_UID, initSeqId);
-        if (uid == null)
-        {
-            return;
-        }
-        userDao.delete(uid);
     }
 }

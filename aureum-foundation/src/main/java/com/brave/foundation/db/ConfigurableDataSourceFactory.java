@@ -8,45 +8,49 @@
  */
 package com.brave.foundation.db;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import com.brave.foundation.util.AESUtil;
 
 /**
- * <一句话功能简述>
- * <功能详细描述>.
- *
- * @author  ZZY
- * @version  [版本号, 2015年6月7日]
+ * A factory for creating ConfigurableDataSource objects.
  */
 public class ConfigurableDataSourceFactory implements FactoryBean<DataSource>
 {
-    
-    /** The config loaction. */
-    private String configLocation;
+    /** The data source properties. */
+    protected Properties dataSourceProperties;
     
     /**
-     * Sets the config loaction.
+     * Gets the data source properties.
      *
-     * @param configLocation the new config location
+     * @return the data source properties
      */
-    public void setConfigLocation(String configLocation)
+    public Properties getDataSourceProperties()
     {
-        this.configLocation = configLocation;
+        return dataSourceProperties;
+    }
+    
+    /**
+     * Sets the data source properties.
+     *
+     * @param dataSourceProperties the new data source properties
+     */
+    public void setDataSourceProperties(Properties dataSourceProperties)
+    {
+        this.dataSourceProperties = dataSourceProperties;
     }
     
     /** {@inheritDoc} */
     
-    public DataSource getObject() throws Exception
+    public DataSource getObject()
+        throws Exception
     {
-        return BasicDataSourceFactory.createDataSource(getProperties());
+        return BasicDataSourceFactory.createDataSource(getCustomizedProperties());
     }
     
     /** {@inheritDoc} */
@@ -64,6 +68,16 @@ public class ConfigurableDataSourceFactory implements FactoryBean<DataSource>
     }
     
     /**
+     * Gets the customized properties.
+     *
+     * @return the customized properties
+     */
+    protected Properties getCustomizedProperties()
+    {
+        return decryptPassword(getDataSourceProperties());
+    }
+    
+    /**
      * Decrypt password.
      *
      * @param properties the properties
@@ -76,25 +90,4 @@ public class ConfigurableDataSourceFactory implements FactoryBean<DataSource>
         return properties;
     }
     
-    /**
-     * Load properties.
-     *
-     * @return the properties
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
-    protected Properties loadProperties() throws IOException
-    {
-        return PropertiesLoaderUtils.loadAllProperties(configLocation);
-    }
-    
-    /**
-     * Gets the properties.
-     *
-     * @return the properties
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
-    protected Properties getProperties() throws IOException
-    {
-        return decryptPassword(loadProperties());
-    }
 }
