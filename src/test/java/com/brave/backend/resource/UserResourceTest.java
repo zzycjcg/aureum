@@ -31,7 +31,7 @@ import com.brave.backend.util.SessionHolder;
  * @since v0.0.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath*:spring/spring-beans.xml", "classpath*:spring/backend.restserver.*.xml",
+@ContextConfiguration({"classpath*:META-INF/spring/spring-beans.xml", "classpath*:spring/backend.restserver.*.xml",
     "classpath*:spring/test.*.xml"})
 @Transactional
 public class UserResourceTest

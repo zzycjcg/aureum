@@ -20,8 +20,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-            classpath*:spring/spring-beans.xml
-            classpath*:spring/backend.restserver*.xml
+            classpath*:META-INF/spring-beans.xml
+            classpath*:spring/backend.restserver.*.xml
         </param-value>
 	</context-param>
 
