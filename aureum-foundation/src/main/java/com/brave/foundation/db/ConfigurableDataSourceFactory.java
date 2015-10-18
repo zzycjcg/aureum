@@ -1,11 +1,3 @@
-/*
- * 文 件 名:  ConfigurableDataSource.java
- * 版    权:  zhuzhiyong Copyright YYYY-YYYY,  All rights reserved
- * 描    述:  <描述>
- * 修 改 人:  ZZY
- * 修改时间:  2015年6月7日
- * 修改内容:  <修改内容>
- */
 package com.brave.foundation.db;
 
 import java.util.Properties;
@@ -18,7 +10,10 @@ import org.springframework.beans.factory.FactoryBean;
 import com.brave.foundation.util.AESUtil;
 
 /**
- * A factory for creating ConfigurableDataSource objects.
+ * 自定义DataSource工厂.
+ *
+ * @author zhiyong zhu at 2015-10-18
+ * @since v0.0.1
  */
 public class ConfigurableDataSourceFactory implements FactoryBean<DataSource>
 {
@@ -47,6 +42,7 @@ public class ConfigurableDataSourceFactory implements FactoryBean<DataSource>
     
     /** {@inheritDoc} */
     
+    @Override
     public DataSource getObject()
         throws Exception
     {
@@ -55,6 +51,7 @@ public class ConfigurableDataSourceFactory implements FactoryBean<DataSource>
     
     /** {@inheritDoc} */
     
+    @Override
     public Class<?> getObjectType()
     {
         return DataSource.class;
@@ -62,6 +59,7 @@ public class ConfigurableDataSourceFactory implements FactoryBean<DataSource>
     
     /** {@inheritDoc} */
     
+    @Override
     public boolean isSingleton()
     {
         return true;

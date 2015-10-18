@@ -11,12 +11,11 @@ package com.brave.foundation.dao;
 import java.util.List;
 
 /**
- * <一句话功能简述>
- * <功能详细描述>.
+ * The Interface BaseDao.
  *
- * @author  ZZY
- * @version  [版本号, 2015年6月7日]
+ * @author zhiyong zhu at 2015-10-18
  * @param <T> the generic type
+ * @since v0.0.1
  */
 public interface BaseDao<T>
 {
