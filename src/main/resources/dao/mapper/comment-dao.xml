@@ -75,4 +75,9 @@
 		#{text},
 		#{multiMedia})
 	</insert>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from T_COMMENT where
+		COMMENT_ID=#{commentId}
+	</delete>
 </mapper>

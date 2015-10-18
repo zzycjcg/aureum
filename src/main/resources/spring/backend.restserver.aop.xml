@@ -18,6 +18,8 @@
 				propagation="REQUIRED" />
 			<tx:method name="nextVal" isolation="REPEATABLE_READ"
 				propagation="REQUIRED" />
+			<tx:method name="addConfig" isolation="REPEATABLE_READ"
+				propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
 
@@ -32,11 +34,18 @@
 		<aop:pointcut
 			expression="execution(* com.brave.backend.dao.SeqGenDao+.nextVal(..))"
 			id="pointcut.SeqGenDao" />
+		<aop:pointcut
+			expression="execution(* com.brave.backend.resource.impl.SystemResourceImpl.addConfig(..))"
+			id="pointcut.AddConfig" />
 		<aop:advisor advice-ref="advice.Base" pointcut-ref="pointcut.ResourceDbOperate" />
 		<aop:advisor advice-ref="advice.Base" pointcut-ref="pointcut.SeqGenDao" />
-
+		<aop:advisor advice-ref="advice.Base" pointcut-ref="pointcut.AddConfig" />
 		<aop:aspect ref="logging">
 			<aop:after-throwing method="logging" pointcut-ref="pointcut.SeqGenDao"
+				throwing="e" />
+		</aop:aspect>
+		<aop:aspect ref="logging">
+			<aop:after-throwing method="logging" pointcut-ref="pointcut.AddConfig"
 				throwing="e" />
 		</aop:aspect>
 	</aop:config>
