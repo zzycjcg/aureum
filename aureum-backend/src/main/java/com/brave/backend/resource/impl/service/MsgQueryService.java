@@ -32,7 +32,7 @@ public class MsgQueryService
      *
      * @param instance the new instance
      */
-    protected static void setInstance(MsgQueryService instance)
+    public static void setInstance(MsgQueryService instance)
     {
         MsgQueryService.instance = instance;
     }
@@ -57,6 +57,16 @@ public class MsgQueryService
         }
         
         return instance;
+    }
+    
+    /**
+     * Sets the msg dao.
+     *
+     * @param msgDao the new msg dao
+     */
+    public void setMsgDao(MsgDao msgDao)
+    {
+        this.msgDao = msgDao;
     }
     
     /**

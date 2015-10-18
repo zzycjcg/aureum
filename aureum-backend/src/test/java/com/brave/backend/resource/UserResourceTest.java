@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.brave.backend.constant.ReturnCodes;
 import com.brave.backend.constant.ReturnMessages;
@@ -35,6 +36,7 @@ import com.brave.backend.util.SessionHolder;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring/spring-beans.xml", "classpath:spring/backend.restserver.*.xml"})
+@Transactional
 public class UserResourceTest
 {
     @Resource
@@ -50,20 +52,23 @@ public class UserResourceTest
     
     private String uid;
     
-    private final String email = "zzycjcg@qq.com";
+    private static final String email = "zzycjcg@qq.com";
     
-    private final String accountName = email;
+    private static final String accountName = email;
     
-    private final String password = "abcd1234";
+    private static final String password = "abcd1234";
     
-    private final String username = "zzycjcg";
+    private static final String username = "zzycjcg";
+    
+    private String initSeqId;
     
     /**
      * Prepare.
      */
     @Before
-    public void prepare()
+    public void init()
     {
+        initSeqId = seqGenDao.currentVal(SeqIds.SEQ_UID);
         registerRequest = new RegisterRequest();
         registerRequest.setUsername(username);
         registerRequest.setEmail(email);
@@ -121,12 +126,12 @@ public class UserResourceTest
     @After
     public void clean()
     {
+        seqGenDao.setVal(SeqIds.SEQ_UID, initSeqId);
         if (uid == null)
         {
             return;
         }
         userDao.delete(uid);
-        seqGenDao.setVal(SeqIds.SEQ_UID, "0");
         uid = null;
     }
     
