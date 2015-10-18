@@ -48,7 +48,7 @@ public class UserResourceTest extends UserBasedAbstractTest
     @Test
     public void testCheckAccountNameExistance()
     {
-        // 登录前先注册
+        // 先注册一个用户，再用该用户检查存在性
         doRegister();
         doCheckAccountNameExistance();
     }
