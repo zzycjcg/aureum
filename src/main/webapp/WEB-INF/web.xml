@@ -20,7 +20,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-            classpath*:META-INF/spring-beans.xml
+            classpath*:META-INF/spring/spring-beans.xml
             classpath*:spring/backend.restserver.*.xml
         </param-value>
 	</context-param>
@@ -42,7 +42,7 @@
 
 	<servlet>
 		<servlet-name>RestfulServer</servlet-name>
-		<servlet-class>com.brave.foundation.restserver.SpringServletContainer</servlet-class>
+		<servlet-class>com.github.zzycjcg.foundation.restserver.SpringServletContainer</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.core.Application</param-name>
 			<param-value>foundation.restserver.ResourceConfig</param-value>
@@ -52,4 +52,8 @@
 		<servlet-name>RestfulServer</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 </web-app>
