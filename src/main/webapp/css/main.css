@@ -1,6 +1,15 @@
 /*
-	Main CSS
+    Main CSS
 */
+
+
+/*
+    公共
+*/
+
+.common {
+    font-family: MicrosoftYaHei, '微软雅黑', Arial, Tahoma, Helvetica, Georgia, Sans-serif, 'STXihei', '华文黑体', Hei, 'Hiragino Kaku Gothic Pro', SimSun;
+}
 
 .main-color {
     background: #f9f9f9;
@@ -18,18 +27,20 @@
     background-color: white;
 }
 
+.login-title {
+    font-size: 18px;
+    width: 360px;
+    margin: 10px auto;
+    text-align: center;
+}
+
 .login-box {
     margin: 50px;
 }
 
 .login-word {
     font-size: 15px;
-    /* font: 'Andale Mono';*/
-}
-
-.input-box {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 15px 0px 5px 0px;
 }
 
 .login-input {
@@ -42,7 +53,7 @@
 
 .link-word {
     font-size: 13px;
-    margin-bottom: 20px;
+    margin: 10px 0px 20px 0px;
 }
 
 .login-btn {
