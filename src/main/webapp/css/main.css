@@ -1,0 +1,69 @@
+/*
+	Main CSS
+*/
+
+.main-color {
+    background: #f9f9f9;
+}
+
+.site-header {
+    height: 70px;
+}
+
+.login-area {
+    width: 360px;
+    border: 1px solid #d8dee2;
+    position: relative;
+    margin: 10px auto;
+    background-color: white;
+}
+
+.login-box {
+    margin: 50px;
+}
+
+.login-word {
+    font-size: 15px;
+    /* font: 'Andale Mono';*/
+}
+
+.input-box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login-input {
+    border: #999 solid 1px;
+    height: 32px;
+    line-height: 32px\9;
+    text-indent: 5px;
+    width: 100%;
+}
+
+.link-word {
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.login-btn {
+    border: #999 solid 1px;
+    height: 32px;
+    background-color: #79d858;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.btn-word {
+    font-size: 13px;
+    padding: 6px 12px;
+    text-align: center;
+}
+
+.link-register {
+    position: relative;
+    left: 149px;
+}
+
+.site-footer {
+    height: 80px;
+}
